@@ -39,120 +39,120 @@ public class VRegistro extends JFrame {
 	@SuppressWarnings("unchecked")
 	private void init() {
 		// TODO Auto-generated method stub
-		setSize(800, 900);
+		setSize(700, 800);
 		getContentPane().setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("REGISTRO");
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 30));
-		lblNewLabel.setBounds(46, 45, 215, 59);
+		lblNewLabel.setBounds(46, 27, 215, 59);
 		getContentPane().add(lblNewLabel);
 
 		txtNombre = new JTextField();
-		txtNombre.setBounds(143, 144, 230, 59);
+		txtNombre.setBounds(132, 108, 189, 59);
 		getContentPane().add(txtNombre);
 		txtNombre.setColumns(10);
 
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setFont(new Font("Dialog", Font.PLAIN, 20));
-		lblNombre.setBounds(57, 144, 99, 59);
+		lblNombre.setBounds(46, 108, 99, 59);
 		getContentPane().add(lblNombre);
 
 		txtApellido = new JTextField();
 		txtApellido.setColumns(10);
-		txtApellido.setBounds(477, 144, 240, 59);
+		txtApellido.setBounds(466, 108, 189, 59);
 		getContentPane().add(txtApellido);
 
 		JLabel lblApellido = new JLabel("Apellidos");
 		lblApellido.setFont(new Font("Dialog", Font.PLAIN, 20));
-		lblApellido.setBounds(383, 144, 99, 59);
+		lblApellido.setBounds(372, 108, 99, 59);
 		getContentPane().add(lblApellido);
 
 		JLabel lblFecNac = new JLabel("Fecha de Nacimiento");
 		lblFecNac.setFont(new Font("Dialog", Font.PLAIN, 20));
-		lblFecNac.setBounds(57, 222, 204, 59);
+		lblFecNac.setBounds(46, 186, 204, 59);
 		getContentPane().add(lblFecNac);
 
 		JLabel lblDni = new JLabel("DNI");
 		lblDni.setFont(new Font("Dialog", Font.PLAIN, 20));
-		lblDni.setBounds(57, 300, 99, 59);
+		lblDni.setBounds(46, 264, 99, 59);
 		getContentPane().add(lblDni);
 
 		txtDni = new JTextField();
 		txtDni.setColumns(10);
-		txtDni.setBounds(143, 300, 189, 59);
+		txtDni.setBounds(132, 264, 127, 59);
 		getContentPane().add(txtDni);
 
 		JLabel lblTelefono = new JLabel("Telefono: +");
 		lblTelefono.setFont(new Font("Dialog", Font.PLAIN, 20));
-		lblTelefono.setBounds(342, 300, 127, 59);
+		lblTelefono.setBounds(269, 264, 127, 59);
 		getContentPane().add(lblTelefono);
 
 		txtTelef = new JTextField();
 		txtTelef.setColumns(10);
-		txtTelef.setBounds(534, 300, 183, 59);
+		txtTelef.setBounds(480, 268, 175, 55);
 		getContentPane().add(txtTelef);
 
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setFont(new Font("Dialog", Font.PLAIN, 20));
-		lblEmail.setBounds(57, 456, 99, 59);
+		lblEmail.setBounds(46, 420, 99, 59);
 		getContentPane().add(lblEmail);
 
 		JLabel lblContrasenia = new JLabel("Contraseña");
 		lblContrasenia.setFont(new Font("Dialog", Font.PLAIN, 20));
-		lblContrasenia.setBounds(57, 534, 130, 59);
+		lblContrasenia.setBounds(46, 498, 130, 59);
 		getContentPane().add(lblContrasenia);
 
 		JLabel lblContrasenia2 = new JLabel("Repite la contraseña");
 		lblContrasenia2.setFont(new Font("Dialog", Font.PLAIN, 20));
-		lblContrasenia2.setBounds(57, 612, 198, 59);
+		lblContrasenia2.setBounds(22, 576, 198, 59);
 		getContentPane().add(lblContrasenia2);
 
 		txtContrasenia = new JTextField();
 		txtContrasenia.setColumns(10);
-		txtContrasenia.setBounds(279, 534, 438, 59);
+		txtContrasenia.setBounds(220, 498, 435, 59);
 		getContentPane().add(txtContrasenia);
 
 		txtContrasenia2 = new JTextField();
 		txtContrasenia2.setColumns(10);
-		txtContrasenia2.setBounds(279, 612, 438, 59);
+		txtContrasenia2.setBounds(220, 580, 435, 59);
 		getContentPane().add(txtContrasenia2);
 
 		txtEmail = new JTextField();
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(143, 456, 574, 59);
+		txtEmail.setBounds(132, 420, 523, 59);
 		getContentPane().add(txtEmail);
 
 		btnCrearCuenta = new JButton("Crear Cuenta");
 		btnCrearCuenta.setFont(new Font("Dialog", Font.PLAIN, 20));
-		btnCrearCuenta.setBounds(93, 718, 253, 82);
+		btnCrearCuenta.setBounds(68, 668, 253, 59);
 		getContentPane().add(btnCrearCuenta);
 
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setFont(new Font("Dialog", Font.PLAIN, 20));
-		btnCancelar.setBounds(439, 718, 253, 82);
+		btnCancelar.setBounds(393, 668, 253, 59);
 		getContentPane().add(btnCancelar);
 
 		JLabel lblGenero = new JLabel("Genero");
 		lblGenero.setFont(new Font("Dialog", Font.PLAIN, 20));
-		lblGenero.setBounds(57, 378, 99, 59);
+		lblGenero.setBounds(46, 342, 99, 59);
 		getContentPane().add(lblGenero);
 
 		rdbtnMasc = new JRadioButton("Masculino");
 		btngrpGenero.add(rdbtnMasc);
 		rdbtnMasc.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		rdbtnMasc.setBounds(177, 379, 130, 57);
+		rdbtnMasc.setBounds(166, 343, 130, 57);
 		getContentPane().add(rdbtnMasc);
 
 		rdbtnFemenino = new JRadioButton("Femenino");
 		btngrpGenero.add(rdbtnFemenino);
 		rdbtnFemenino.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		rdbtnFemenino.setBounds(339, 379, 130, 57);
+		rdbtnFemenino.setBounds(328, 343, 130, 57);
 		getContentPane().add(rdbtnFemenino);
 
 		rdbtnPrefieroNoDecirlo = new JRadioButton("Prefiero no decirlo");
 		btngrpGenero.add(rdbtnPrefieroNoDecirlo);
 		rdbtnPrefieroNoDecirlo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		rdbtnPrefieroNoDecirlo.setBounds(511, 379, 215, 57);
+		rdbtnPrefieroNoDecirlo.setBounds(466, 343, 215, 57);
 		getContentPane().add(rdbtnPrefieroNoDecirlo);
 
 		cmbDia = new JComboBox();
@@ -160,14 +160,14 @@ public class VRegistro extends JFrame {
 		cmbDia.setModel(new DefaultComboBoxModel(
 				new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16",
 						"17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-		cmbDia.setBounds(271, 222, 99, 59);
+		cmbDia.setBounds(260, 186, 72, 59);
 		getContentPane().add(cmbDia);
 
 		cmbMes = new JComboBox();
 		cmbMes.setFont(new Font("Dialog", Font.PLAIN, 20));
 		cmbMes.setModel(new DefaultComboBoxModel(
 				new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-		cmbMes.setBounds(404, 222, 99, 59);
+		cmbMes.setBounds(393, 186, 72, 59);
 		getContentPane().add(cmbMes);
 
 		cmbAnio = new JComboBox();
@@ -175,7 +175,7 @@ public class VRegistro extends JFrame {
 		String[] aniosA = obtenerAnios();
 		cmbAnio.setModel(new DefaultComboBoxModel(aniosA));
 		cmbAnio.setSelectedIndex(0);
-		cmbAnio.setBounds(538, 222, 136, 59);
+		cmbAnio.setBounds(527, 186, 128, 59);
 		getContentPane().add(cmbAnio);
 
 		cmbPrefijo = new JComboBox();
@@ -184,12 +184,12 @@ public class VRegistro extends JFrame {
 				"359", "385", "357", "45", "421", "386", "372", "358", "33", "30", "36", "354", "353", "39", "371",
 				"423", "370", "352", "389", "356", "373", "377", "31", "47", "48", "351", "40", "44", "7", "378", "378",
 				"421", "46", "41", "90", "380", "379" }));
-		cmbPrefijo.setBounds(448, 300, 72, 59);
+		cmbPrefijo.setBounds(372, 264, 72, 59);
 		getContentPane().add(cmbPrefijo);
 	}
 
 	private String[] obtenerAnios() {
-		String[] aniosA = new String[103];
+		String[] aniosA = new String[104];
 		for (int i = 1920; i < 2024; i++) {
 			aniosA[i - 1920] = "" + i;
 		}
