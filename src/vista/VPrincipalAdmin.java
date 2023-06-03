@@ -4,6 +4,7 @@ package vista;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,17 +21,19 @@ import javax.swing.JMenuItem;
 public class VPrincipalAdmin extends JFrame {
 
 	private JPanel contentPane;
-	private JMenuItem mntmOpcionRegistro;
 	private JMenuItem mntmOpcionModificacion;
+	private JMenuItem mntmOpcionEliminar;
 	private JScrollPane scrpContenedor;
 	private JSeparator separator_2;
+	private JMenuItem mntmOpcionRegistro;
 	private JMenuItem mntmOpcionConsulta;
 	private JSeparator separator;
 	private JMenuItem mnMenuSalir;
 	public static final String SALIR = "Salir";
 	public static final String REGISTRO = "Añadir actividad";
 	public static final String MODIFICACION = "Modificación de actividad";
-	public static final String ELIMINAR = "Eliminar activadad";
+	public static final String ELIMINAR = "Eliminar actividad";
+	private static final String CONSULTA = "Consulta";
 	public VPrincipalAdmin() {
 		init();
 		this.setExtendedState(this.MAXIMIZED_BOTH);
@@ -54,30 +57,39 @@ public class VPrincipalAdmin extends JFrame {
 		mnMenu1.setFont(new Font("Dialog", Font.BOLD, 14));
 		mnbBarraMenu.add(mnMenu1);
 		
+		JMenu mnMenu2 = new JMenu("Clientes");
+		mnMenu2.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(0, 0, 0)));
+		mnMenu2.setFont(new Font("Dialog", Font.BOLD, 14));
+		mnbBarraMenu.add(mnMenu2);
+		
 		mnMenuSalir = new JMenuItem(SALIR);
 		mnMenuSalir.setFont(new Font("Dialog", Font.BOLD, 14));
 		mnbBarraMenu.add(mnMenuSalir);
 
-		mntmOpcionConsulta = new JMenuItem(REGISTRO);
-		mntmOpcionConsulta.setHorizontalAlignment(SwingConstants.LEFT);
-		mntmOpcionConsulta.setFont(new Font("Arial", Font.PLAIN, 12));
-		mnMenu1.add(mntmOpcionConsulta);
-
-		separator = new JSeparator();
-
-		mnMenu1.add(separator);
-		mntmOpcionRegistro = new JMenuItem(MODIFICACION);
+		mntmOpcionRegistro = new JMenuItem(REGISTRO);
 		mntmOpcionRegistro.setHorizontalAlignment(SwingConstants.LEFT);
 		mntmOpcionRegistro.setFont(new Font("Arial", Font.PLAIN, 12));
 		mnMenu1.add(mntmOpcionRegistro);
 
-		separator_2 = new JSeparator();
-		mnMenu1.add(separator_2);
+		separator = new JSeparator();
 
-		mntmOpcionModificacion = new JMenuItem(ELIMINAR);
+		mnMenu1.add(separator);
+		mntmOpcionModificacion = new JMenuItem(MODIFICACION);
 		mntmOpcionModificacion.setHorizontalAlignment(SwingConstants.LEFT);
 		mntmOpcionModificacion.setFont(new Font("Arial", Font.PLAIN, 12));
 		mnMenu1.add(mntmOpcionModificacion);
+
+		separator_2 = new JSeparator();
+		mnMenu1.add(separator_2);
+
+		mntmOpcionEliminar = new JMenuItem(ELIMINAR);
+		mntmOpcionEliminar.setHorizontalAlignment(SwingConstants.LEFT);
+		mntmOpcionEliminar.setFont(new Font("Arial", Font.PLAIN, 12));
+		mnMenu1.add(mntmOpcionEliminar);
+		mntmOpcionConsulta = new JMenuItem(CONSULTA);
+		mntmOpcionConsulta.setHorizontalAlignment(SwingConstants.LEFT);
+		mntmOpcionConsulta.setFont(new Font("Arial", Font.PLAIN, 12));
+		mnMenu2.add(mntmOpcionConsulta);
 		getContentPane().setLayout(null);
 		getContentPane().setLayout(null);
 	}
@@ -94,5 +106,9 @@ public class VPrincipalAdmin extends JFrame {
 	}
 	public void mostrarAlerta(String alerta) {
 		JOptionPane.showMessageDialog(this, alerta, "Alerta", JOptionPane.WARNING_MESSAGE);
+	}
+	public void cargarPanel(JPanel panel) {
+		// TODO Auto-generated method stub
+		scrpContenedor.setViewportView(panel);
 	}
 }

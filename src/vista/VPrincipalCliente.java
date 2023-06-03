@@ -4,22 +4,36 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JMenu;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.Font;
 
 public class VPrincipalCliente extends JFrame{
 	private JMenuItem mntmActividades;
 	private JMenuItem mntmInstalaciones;
-	
-	
+	private JPanel contentPane;
+	private JScrollPane scrpContenedor;
 	public VPrincipalCliente() {
-		getContentPane().setLayout(null);
-		this.setExtendedState(this.MAXIMIZED_BOTH);
+		
 		init();
+		this.setExtendedState(this.MAXIMIZED_BOTH);
 	}
 
 	private void init() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		configurarMenu();
+		setContentPane(contentPane);
+				
+	}
+
+	private void configurarMenu() {
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setToolTipText("Menu");
 		menuBar.setBounds(0, 0, 102, 22);
@@ -46,7 +60,6 @@ public class VPrincipalCliente extends JFrame{
 		JMenu mnSalir = new JMenu("Salir");
 		mnSalir.setFont(new Font("Dialog", Font.BOLD, 14));
 		menuBar.add(mnSalir);
-		
 	}
 	
 	public void hacerVisible() {
@@ -63,5 +76,9 @@ public class VPrincipalCliente extends JFrame{
 	}
 	public void mostrarAlerta(String alerta) {
 		JOptionPane.showMessageDialog(this, alerta, "Error", JOptionPane.WARNING_MESSAGE);
+	}
+	public void cargarPanel(JPanel panel) {
+		// TODO Auto-generated method stub
+		scrpContenedor.setViewportView(panel);
 	}
 }
