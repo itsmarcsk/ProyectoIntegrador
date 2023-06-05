@@ -25,7 +25,7 @@ public class VPrincipalCliente extends JFrame {
 	private JMenuItem mnSalir;
 
 	public VPrincipalCliente() {
-
+		super("FITDEVELOPER");
 		init();
 		this.setExtendedState(this.MAXIMIZED_BOTH);
 	}

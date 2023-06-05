@@ -41,7 +41,7 @@ public class Persistance {
 	public Persistance() {
 		aDB = new AccesoDB();
 	}
-
+	//inicio de sesion cliente
 	public boolean confirmarInicioCliente(String dni, String contrasenia) {
 		String queryCliente = "SELECT " + COL_DNI_CLI + ", " + COL_CONTRASENA_CLI + " FROM " + TABLA_CLI + " WHERE "
 				+ COL_DNI_CLI + " = ?";
@@ -85,7 +85,7 @@ public class Persistance {
 		return conseguido;
 
 	}
-
+	//inicio de sesion admin
 	public boolean confirmarInicioAdmin(String dni, String contrasenia) {
 		String queryAdmin = "SELECT " + COL_DNI_ADMIN + ", " + COL_CONTRASENA_ADMIN + " FROM " + TABLA_CLI + " WHERE "
 				+ COL_DNI_CLI + " = ?";
@@ -126,37 +126,7 @@ public class Persistance {
 		return conseguido;
 
 	}
-
-	public int registrarCliente(Cliente c) {
-		String query = "INSERT INTO " + TABLA_CLI + "( " + COL_DNI_CLI + ", " + COL_NOMBRE_CLI + ", " + COL_APELLIDO_CLI
-				+ ", " + COL_DIA_NAC_CLI + ", " + COL_MES_NAC_CLI + ", " + COL_ANO_NAC_CLI + ", " + COL_PREFIJO_NUM_CLI + ", "
-				+ COL_NUM_TEL_CLI + ", " + COL_CONTRASENA_CLI + ", " + COL_EMAIL_CLI + ", " + COL_GENERO_CLI + ") VALUES (?, ?, ? , ? , ? , ? , ? , ?, ? , ? , ?);";
-
-		Connection con = null;
-		PreparedStatement stmt = null;
-		int res = 0;
-		try {
-			con = aDB.getConnection();
-			stmt = con.prepareStatement(query);
-			stmt.setString(1, c.getDni());
-			stmt.setString(2, c.getNombre());
-			stmt.setString(3, c.getApellido());
-			stmt.setInt(4, c.getDiaNac());
-			stmt.setInt(5, c.getMesNac());
-			stmt.setDouble(6, c.getAnioNac());
-			stmt.setDouble(7, c.getPrefijo());
-			stmt.setInt(8, c.getTelefono());
-			stmt.setString(9, c.getContrasenia());
-			stmt.setString(10, c.getEmail());
-			stmt.setString(11, c.getGenero());
-			res = stmt.executeUpdate();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			res = -1;
-		}
-		return res;
-	}
+		// datos para PPerfil del cliente
 	public Cliente consultarDatos(String dni) {
 		String query = "SELECT " + COL_DNI_CLI + ", "  + COL_NOMBRE_CLI + ", " + COL_APELLIDO_CLI + ", " + COL_DIA_NAC_CLI + ", " + COL_MES_NAC_CLI + ", " + COL_ANO_NAC_CLI + ", " + COL_EMAIL_CLI + " FROM " + TABLA_CLI + " WHERE DNI = ?" ;
 		Connection con = null;
@@ -194,17 +164,17 @@ public class Persistance {
 		}
 		return c;
 	}
-	public Actividad consultarActividades(){
-		String query = "SELECT " + COL_NOM_ACTI + ", " + COL_PRECIO_ACTI + " FROM " + TABLA_ACTIVIDADES;
+	public Actividad consultarActividadesCliente(String dni) {
+		String query = "SELECT " + COL_NOM_ACTI + ", " + COL_PRECIO_ACTI + ", " + COL_DES_ACT + " FROM " + TABLA_ACTIVIDADES + " WHERE " + COL_ID_ACTI + " = SELECT " + COL_ID_CLI_ACT + " FROM " + TABLA_CLIENTES_ACTIVIDADES + " WHERE " + COL_DNI_CLI + " = ?";
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rslt = null;
-		Actividad c = null;
+		Actividad a = null;
 		try {
 			con = aDB.getConnection();
 			stmt = con.prepareStatement(query);
 			rslt = stmt.executeQuery();
-			c = new Actividad(rslt.getString(COL_NOM_ACTI),rslt.getInt(COL_PRECIO_ACTI));
+			a = new Actividad(rslt.getString(COL_NOM_ACTI),rslt.getInt(COL_PRECIO_ACTI), rslt.getString(COL_DES_ACT));
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -228,26 +198,101 @@ public class Persistance {
 				e.printStackTrace();
 			}
 		}
-		return c;
+		return a;
+	
 	}
-	public int actualizarDatos(String dni, Cliente c) {
-		String query = "UPDATE " + TABLA_CLI + " SET " + COL_NOMBRE_CLI + " = ?, " + COL_APELLIDO_CLI
-				+ " = ?, " + COL_DIA_NAC_CLI + " = ?, " + COL_MES_NAC_CLI + " = ?, " + COL_ANO_NAC_CLI + " = ?, " + COL_EMAIL_CLI
-				+ " = ? WHERE " + COL_DNI_CLI + " = ?";
+	//consultar actividades para PActividad
+		public Actividad consultarActividades(){
+			String query = "SELECT " + COL_NOM_ACTI + ", " + COL_PRECIO_ACTI + " FROM " + TABLA_ACTIVIDADES;
+			Connection con = null;
+			PreparedStatement stmt = null;
+			ResultSet rslt = null;
+			Actividad c = null;
+			try {
+				con = aDB.getConnection();
+				stmt = con.prepareStatement(query);
+				rslt = stmt.executeQuery();
+				c = new Actividad(rslt.getString(COL_NOM_ACTI),rslt.getInt(COL_PRECIO_ACTI));
+				
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				try {
+					if (rslt != null) {
+						rslt.close();
+					}
+					if (stmt != null) {
+						stmt.close();
+					}
+					if (con != null) {
+						con.close();
+					}
+				} catch (SQLException e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+			}
+			return c;
+		}
+		//actualizar datos de cliente
+		public int actualizarDatos(String dni, Cliente c) {
+			String query = "UPDATE " + TABLA_CLI + " SET " + COL_NOMBRE_CLI + " = ?, " + COL_APELLIDO_CLI
+					+ " = ?, " + COL_DIA_NAC_CLI + " = ?, " + COL_MES_NAC_CLI + " = ?, " + COL_ANO_NAC_CLI + " = ?, " + COL_EMAIL_CLI
+					+ " = ? WHERE " + COL_DNI_CLI + " = ?";
+			int res = 0;
+			Connection con = null;
+			PreparedStatement stmt = null;
+			try {
+				con = aDB.getConnection();
+				stmt = con.prepareStatement(query);
+				stmt.setString(1, c.getNombre());
+				stmt.setString(2, c.getApellido());
+				stmt.setInt(3, c.getDiaNac());
+				stmt.setInt(4, c.getMesNac());
+				stmt.setInt(5, c.getAnioNac());
+				stmt.setString(6, c.getEmail());
+				res = stmt.executeUpdate();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				res = -1;
+			} finally {
+				try {
+
+					if (stmt != null) {
+						stmt.close();
+					}
+					if (con != null) {
+						con.close();
+					}
+				} catch (SQLException e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+			}
+			return res;
+		}
+	//borrar para PPerfil y para PConsultarClientes
+	public int borrarCuenta(String dni) {
+		String query = "DELETE FROM " + TABLA_CLI + " WHERE " + COL_DNI_CLI + " = ?";
 		int res = 0;
 		Connection con = null;
 		PreparedStatement stmt = null;
+
 		try {
 			con = aDB.getConnection();
 			stmt = con.prepareStatement(query);
-			stmt.setString(1, c.getNombre());
-			stmt.setString(2, c.getApellido());
-			stmt.setInt(3, c.getDiaNac());
-			stmt.setInt(4, c.getMesNac());
-			stmt.setInt(5, c.getAnioNac());
-			stmt.setString(6, c.getEmail());
+			stmt.setString(1, dni);
 			res = stmt.executeUpdate();
-		} catch (Exception e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			res = -1;
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			res = -1;
@@ -267,4 +312,36 @@ public class Persistance {
 		}
 		return res;
 	}
+	//registrar datos de cliente
+	public int registrarCliente(Cliente c) {
+		String query = "INSERT INTO " + TABLA_CLI + "( " + COL_DNI_CLI + ", " + COL_NOMBRE_CLI + ", " + COL_APELLIDO_CLI
+				+ ", " + COL_DIA_NAC_CLI + ", " + COL_MES_NAC_CLI + ", " + COL_ANO_NAC_CLI + ", " + COL_PREFIJO_NUM_CLI + ", "
+				+ COL_NUM_TEL_CLI + ", " + COL_CONTRASENA_CLI + ", " + COL_EMAIL_CLI + ", " + COL_GENERO_CLI + ") VALUES (?, ?, ? , ? , ? , ? , ? , ?, ? , ? , ?);";
+
+		Connection con = null;
+		PreparedStatement stmt = null;
+		int res = 0;
+		try {
+			con = aDB.getConnection();
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, c.getDni());
+			stmt.setString(2, c.getNombre());
+			stmt.setString(3, c.getApellido());
+			stmt.setInt(4, c.getDiaNac());
+			stmt.setInt(5, c.getMesNac());
+			stmt.setDouble(6, c.getAnioNac());
+			stmt.setDouble(7, c.getPrefijo());
+			stmt.setInt(8, c.getTelefono());
+			stmt.setString(9, c.getContrasenia());
+			stmt.setString(10, c.getEmail());
+			stmt.setString(11, c.getGenero());
+			res = stmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			res = -1;
+		}
+		return res;
+	}
+	
 }

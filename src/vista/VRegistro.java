@@ -33,10 +33,10 @@ public class VRegistro extends JFrame {
 	private JComboBox cmbPrefijo;
 
 	public VRegistro() {
+		super("REGISTRO");
 		init();
 	}
 
-	@SuppressWarnings("unchecked")
 	private void init() {
 		// TODO Auto-generated method stub
 		setSize(700, 800);
