@@ -2,6 +2,7 @@ package main;
 
 import java.awt.EventQueue;
 
+import vista.PActividadAdmin;
 import vista.PActividades;
 import vista.PClientes;
 import vista.PConsultarClientes;
@@ -28,8 +29,8 @@ public class Inicio {
 				PConsultarClientes pCC = new PConsultarClientes();
 				PPerfil pP = new PPerfil();
 				PClientes pC = new PClientes();
-				
-				Control control = new Control(vLogin, vRegistro, vPA, vPC, PA, pP, pCC , pC);
+				PActividadAdmin pAA = new PActividadAdmin();
+				Control control = new Control(vLogin, vRegistro, vPA, vPC, PA, pP, pCC , pC, pAA);
 				vLogin.hacerVisible();
 			}
 		});

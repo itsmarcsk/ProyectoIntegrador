@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JMenuItem;
 
 import db.Persistance;
+import vista.PActividadAdmin;
 import vista.PActividades;
 import vista.PClientes;
 import vista.PConsultarClientes;
@@ -26,12 +27,16 @@ public class Control implements ActionListener{
 	private PPerfil PP;
 	private PConsultarClientes pCC;
 	private PClientes pC;
+	private PActividadAdmin pAA;
 	private Persistance pers;
 
 	
 	
+	
+
+
 	public Control(VLogin vLogin, VRegistro vRegistro, VPrincipalAdmin vPA, VPrincipalCliente vPC, PActividades pA,
-			PPerfil pP, PConsultarClientes pCC, PClientes pC) {
+			PPerfil pP, PConsultarClientes pCC, PClientes pC, PActividadAdmin pAA) {
 		this.vLogin = vLogin;
 		this.vRegistro = vRegistro;
 		this.vPA = vPA;
@@ -40,8 +45,12 @@ public class Control implements ActionListener{
 		this.PP = pP;
 		this.pCC = pCC;
 		this.pC = pC;
+		this.pAA = pAA;
 		pers = new Persistance();
 	}
+
+
+
 
 
 

@@ -57,9 +57,6 @@ public class Cliente {
 		this.email = email;
 	}
 
-
-
-
 	public Cliente(String dni, String contrasenia) {
 		this.dni = dni;
 		this.contrasenia = contrasenia;

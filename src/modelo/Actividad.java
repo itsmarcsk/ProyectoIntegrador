@@ -27,7 +27,14 @@ public class Actividad {
     public void setPrecio(int precio) {
         this.precio = precio;
     }
-    public String getHoraIni() {
+    
+    public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	public String getHoraIni() {
         return horaIni;
     }
     public void setHoraIni(String horaIni) {
