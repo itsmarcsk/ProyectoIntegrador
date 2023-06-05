@@ -173,6 +173,7 @@ public class Persistance {
 		try {
 			con = aDB.getConnection();
 			stmt = con.prepareStatement(query);
+			stmt.setString(1, dni);
 			rslt = stmt.executeQuery();
 			a = new Actividad(rslt.getString(COL_NOM_ACTI),rslt.getInt(COL_PRECIO_ACTI), rslt.getString(COL_DES_ACT));
 			
