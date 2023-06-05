@@ -11,6 +11,10 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 
 public class PPerfil extends JPanel {
+	public static final String BORRAR_ACTIVIDAD = "Borrar Actividad";
+	public static final String CONSULTAR_ACTIVIDAD = "Consultar Actividad";
+	public static final String BORRAR_CUENTA = "Borrar Cuenta";
+	public static final String GUARDAR_CAMBIOS = "Guardar Cambios";
 	private JTextField txtNombre;
 	private JTextField txtContra;
 	private JTextField txtEmail;
@@ -19,9 +23,9 @@ public class PPerfil extends JPanel {
 	private JTable tblListaActividades;
 	private JTextArea txtDescripcion;
 	private JButton btnBorrarActividad;
-	private JButton btnEditarActividad;
+	private JButton btnConsultar;
 	private JScrollPane scrpListaActividades;
-	private JButton btnNewButton;
+	private JButton btnGuardarCambios;
 	private JButton btnBorrarCuenta;
 	public PPerfil() {
 		init();
@@ -81,10 +85,8 @@ public class PPerfil extends JPanel {
 		txtContra = new JTextField();
 		txtContra.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtContra.setHorizontalAlignment(SwingConstants.CENTER);
-		txtContra.setText("••••••••");
-		txtContra.setEnabled(false);
 		txtContra.setColumns(10);
-		txtContra.setBounds(259, 246, 161, 56);
+		txtContra.setBounds(259, 246, 351, 56);
 		panelActividades.add(txtContra);
 		
 		txtEmail = new JTextField();
@@ -96,7 +98,7 @@ public class PPerfil extends JPanel {
 		txtFecNac = new JTextField();
 		txtFecNac.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtFecNac.setColumns(10);
-		txtFecNac.setBounds(254, 460, 351, 56);
+		txtFecNac.setBounds(259, 460, 351, 56);
 		panelActividades.add(txtFecNac);
 		
 		txtDni = new JTextField();
@@ -105,12 +107,12 @@ public class PPerfil extends JPanel {
 		txtDni.setBounds(259, 567, 351, 56);
 		panelActividades.add(txtDni);
 		
-		btnNewButton = new JButton("<html><div center>Cambiar <br> Contraseña </div></html>");
-		btnNewButton.setFont(new Font("Dialog", Font.PLAIN, 16));
-		btnNewButton.setBounds(430, 246, 180, 56);
-		panelActividades.add(btnNewButton);
+		btnGuardarCambios = new JButton(GUARDAR_CAMBIOS);
+		btnGuardarCambios.setFont(new Font("Dialog", Font.PLAIN, 16));
+		btnGuardarCambios.setBounds(430, 660, 180, 43);
+		panelActividades.add(btnGuardarCambios);
 		
-		btnBorrarCuenta = new JButton("Borrar Cuenta");
+		btnBorrarCuenta = new JButton(BORRAR_CUENTA);
 		btnBorrarCuenta.setFont(new Font("Dialog", Font.PLAIN, 20));
 		btnBorrarCuenta.setBounds(45, 724, 219, 66);
 		panelActividades.add(btnBorrarCuenta);
@@ -145,15 +147,15 @@ public class PPerfil extends JPanel {
 		txtDescripcion.setWrapStyleWord(true);
 		scrpDescripcion.setViewportView(txtDescripcion);
 		
-		btnBorrarActividad = new JButton("Borrar Actividad");
+		btnBorrarActividad = new JButton(BORRAR_ACTIVIDAD);
 		btnBorrarActividad.setFont(new Font("Dialog", Font.PLAIN, 20));
-		btnBorrarActividad.setBounds(655, 128, 245, 66);
+		btnBorrarActividad.setBounds(935, 131, 245, 66);
 		panelDatosPersonales.add(btnBorrarActividad);
 		
-		btnEditarActividad = new JButton("Editar Actividad");
-		btnEditarActividad.setFont(new Font("Dialog", Font.PLAIN, 20));
-		btnEditarActividad.setBounds(935, 128, 245, 66);
-		panelDatosPersonales.add(btnEditarActividad);
+		btnConsultar = new JButton(CONSULTAR_ACTIVIDAD);
+		btnConsultar.setFont(new Font("Dialog", Font.PLAIN, 20));
+		btnConsultar.setBounds(655, 131, 245, 66);
+		panelDatosPersonales.add(btnConsultar);
 		
 		JLabel lblDescripcin = new JLabel("Descripción");
 		lblDescripcin.setFont(new Font("Dialog", Font.BOLD, 24));

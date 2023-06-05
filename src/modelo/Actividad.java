@@ -52,4 +52,9 @@ public class Actividad {
         this.horaFin = horaFin;
     }
 
+	public Actividad(String nombre, int precio) {
+		this.nombre = nombre;
+		this.precio = precio;
+	}
+
 }

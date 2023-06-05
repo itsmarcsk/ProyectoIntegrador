@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import modelo.Actividad;
 import modelo.Cliente;
 
 public class Persistance {
@@ -24,19 +25,18 @@ public class Persistance {
 	static final String COL_PREFIJO_NUM_CLI = "PREFIJO NUMERO";
 	static final String COL_NUM_TEL_CLI = "NUMERO DE TELEFONO";
 	static final String COL_CONTRASENA_CLI = "CONTRASEÑA";
-	static final String COL_ACTIVIDADES_CLI = "ACTIVIDADES";
-	static final String COL_RESERVAS_CLI = "RESERVAS";
 	static final String COL_EMAIL_CLI = "EMAIL";
 	static final String COL_GENERO_CLI = "GENERO";
 	static final String TABLA_CLIENTES_ACTIVIDADES = "Clientes_Actividades";
 	static final String COL_ID_CLI_ACT = "ID";
 	static final String COL_DNI_CLI_ACT = "DNI";
+	static final String COL_HORARIO_INI = "HORARIO_INI";
+	static final String COL_HORARIO_FIN = "HORARIO_FIN";
 	static final String TABLA_ACTIVIDADES = "Actividades";
 	static final String COL_ID_ACTI = "ID";
 	static final String COL_PRECIO_ACTI = "PRECIO";
-	static final String COL_HORARIO_INI_ACTI = "HORARIO INICIO";
-	static final String COL_HORARIO_FIN_ACTI = "HORARIO FINAL";
-	static final String COL_ID_DEPORTE_ACTI = "ID DEPORTE";
+	static final String COL_NOM_ACTI = "NOMBRE";
+	static final String COL_DES_ACT = "DESCRIPCION";
 
 	public Persistance() {
 		aDB = new AccesoDB();
@@ -101,7 +101,6 @@ public class Persistance {
 			if (dni == rslt.getString(COL_DNI_ADMIN) && contrasenia == rslt.getString(COL_CONTRASENA_ADMIN)) {
 				conseguido = true;
 			}
-
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -131,7 +130,7 @@ public class Persistance {
 	public int registrarCliente(Cliente c) {
 		String query = "INSERT INTO " + TABLA_CLI + "( " + COL_DNI_CLI + ", " + COL_NOMBRE_CLI + ", " + COL_APELLIDO_CLI
 				+ ", " + COL_DIA_NAC_CLI + ", " + COL_MES_NAC_CLI + ", " + COL_ANO_NAC_CLI + ", " + COL_PREFIJO_NUM_CLI + ", "
-				+ COL_NUM_TEL_CLI + ", " + COL_CONTRASENA_CLI + ", " + COL_ACTIVIDADES_CLI + ", " + COL_RESERVAS_CLI + ", " + COL_EMAIL_CLI + ", " + COL_GENERO_CLI + ") VALUES (?, ?, ? , ? , ? , ? , ? , ? , ? , ?, ? , ? , ?);";
+				+ COL_NUM_TEL_CLI + ", " + COL_CONTRASENA_CLI + ", " + COL_EMAIL_CLI + ", " + COL_GENERO_CLI + ") VALUES (?, ?, ? , ? , ? , ? , ? , ?, ? , ? , ?);";
 
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -148,15 +147,123 @@ public class Persistance {
 			stmt.setDouble(7, c.getPrefijo());
 			stmt.setInt(8, c.getTelefono());
 			stmt.setString(9, c.getContrasenia());
-			stmt.setInt(10, c.getActividades());
-			stmt.setInt(11, c.getReservas());
-			stmt.setString(12, c.getEmail());
-			stmt.setString(13, c.getGenero());
+			stmt.setString(10, c.getEmail());
+			stmt.setString(11, c.getGenero());
 			res = stmt.executeUpdate();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			res = -1;
+		}
+		return res;
+	}
+	public Cliente consultarDatos(String dni) {
+		String query = "SELECT " + COL_DNI_CLI + ", "  + COL_NOMBRE_CLI + ", " + COL_APELLIDO_CLI + ", " + COL_DIA_NAC_CLI + ", " + COL_MES_NAC_CLI + ", " + COL_ANO_NAC_CLI + ", " + COL_EMAIL_CLI + " FROM " + TABLA_CLI + " WHERE DNI = ?" ;
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rslt = null;
+		Cliente c = null;
+		try {
+			con = aDB.getConnection();
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, dni);
+			rslt = stmt.executeQuery();
+			c = new Cliente(rslt.getString(COL_NOMBRE_CLI), rslt.getString(COL_APELLIDO_CLI) , rslt.getInt(COL_DIA_NAC_CLI), rslt.getInt(COL_MES_NAC_CLI), rslt.getInt(COL_ANO_NAC_CLI) , rslt.getString(COL_DNI_CLI), rslt.getString(COL_EMAIL_CLI));
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rslt != null) {
+					rslt.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+		return c;
+	}
+	public Actividad consultarActividades(){
+		String query = "SELECT " + COL_NOM_ACTI + ", " + COL_PRECIO_ACTI + " FROM " + TABLA_ACTIVIDADES;
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rslt = null;
+		Actividad c = null;
+		try {
+			con = aDB.getConnection();
+			stmt = con.prepareStatement(query);
+			rslt = stmt.executeQuery();
+			c = new Actividad(rslt.getString(COL_NOM_ACTI),rslt.getInt(COL_PRECIO_ACTI));
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rslt != null) {
+					rslt.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+		return c;
+	}
+	public int actualizarDatos(String dni, Cliente c) {
+		String query = "UPDATE " + TABLA_CLI + " SET " + COL_NOMBRE_CLI + " = ?, " + COL_APELLIDO_CLI
+				+ " = ?, " + COL_DIA_NAC_CLI + " = ?, " + COL_MES_NAC_CLI + " = ?, " + COL_ANO_NAC_CLI + " = ?, " + COL_EMAIL_CLI
+				+ " = ? WHERE " + COL_DNI_CLI + " = ?";
+		int res = 0;
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try {
+			con = aDB.getConnection();
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, c.getNombre());
+			stmt.setString(2, c.getApellido());
+			stmt.setInt(3, c.getDiaNac());
+			stmt.setInt(4, c.getMesNac());
+			stmt.setInt(5, c.getAnioNac());
+			stmt.setString(6, c.getEmail());
+			res = stmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			res = -1;
+		} finally {
+			try {
+
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
 		}
 		return res;
 	}

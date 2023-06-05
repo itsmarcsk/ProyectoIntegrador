@@ -31,8 +31,8 @@ public class VPrincipalAdmin extends JFrame {
 	private JMenuItem mnMenuSalir;
 	public static final String SALIR = "Salir";
 	public static final String REGISTRO = "Añadir actividad";
-	public static final String MODIFICACION = "Modificación de actividad";
-	public static final String ELIMINAR = "Eliminar actividad";
+	public static final String MODIFICACION = "Consultar actividad";
+
 	private static final String CONSULTA = "Consulta";
 	public VPrincipalAdmin() {
 		init();
@@ -79,13 +79,9 @@ public class VPrincipalAdmin extends JFrame {
 		mntmOpcionModificacion.setFont(new Font("Arial", Font.PLAIN, 12));
 		mnMenu1.add(mntmOpcionModificacion);
 
-		separator_2 = new JSeparator();
-		mnMenu1.add(separator_2);
+//		separator_2 = new JSeparator();
+//		mnMenu1.add(separator_2);
 
-		mntmOpcionEliminar = new JMenuItem(ELIMINAR);
-		mntmOpcionEliminar.setHorizontalAlignment(SwingConstants.LEFT);
-		mntmOpcionEliminar.setFont(new Font("Arial", Font.PLAIN, 12));
-		mnMenu1.add(mntmOpcionEliminar);
 		mntmOpcionConsulta = new JMenuItem(CONSULTA);
 		mntmOpcionConsulta.setHorizontalAlignment(SwingConstants.LEFT);
 		mntmOpcionConsulta.setFont(new Font("Arial", Font.PLAIN, 12));

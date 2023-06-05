@@ -7,79 +7,92 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JMenu;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.Font;
-import java.awt.Color;
 
-public class VPrincipalCliente extends JFrame{
+public class VPrincipalCliente extends JFrame {
+	public static final String SALIR = "Salir";
+	public static final String PERFIL = "Perfil";
+	public static final String ACTIVIDADES = "Actividades";
+	public static final String INSTALACIONES = "Instalaciones";
 	private JPanel contentPane;
 	private JScrollPane scrpContenedor;
 	private JMenuItem mntmInstalaciones;
-	private JMenu mnMenu;
-	private JMenuBar menuBar;
 	private JMenuItem mntmActividades;
+	private JMenuItem mntmPerfil;
+	private JMenuItem mnSalir;
+
 	public VPrincipalCliente() {
-		
+
 		init();
 		this.setExtendedState(this.MAXIMIZED_BOTH);
 	}
 
 	private void init() {
+		setSize(1920, 1080);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
 		
 		configurarMenu();
-				
-
 	}
 
 	private void configurarMenu() {
-		menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
+		JMenuBar menuBar_1 = new JMenuBar();
+		setJMenuBar(menuBar_1);
 		
-		mnMenu = new JMenu("Menu");
-		mnMenu.setFont(new Font("Arial", Font.BOLD, 12));
-		menuBar.add(mnMenu);
+		JMenu mnMenu_1 = new JMenu("Menu");
+		mnMenu_1.setFont(new Font("Dialog", Font.BOLD, 14));
+		menuBar_1.add(mnMenu_1);
 		
-		mntmInstalaciones = new JMenuItem("Instalaciones");
-		mntmInstalaciones.setFont(new Font("Dialog", Font.BOLD, 12));
-		mnMenu.add(mntmInstalaciones);
+		mntmInstalaciones = new JMenuItem(INSTALACIONES);
+		mntmInstalaciones.setHorizontalTextPosition(SwingConstants.CENTER);
+		mntmInstalaciones.setHorizontalAlignment(SwingConstants.CENTER);
+		mntmInstalaciones.setFont(new Font("Dialog", Font.PLAIN, 12));
+		mnMenu_1.add(mntmInstalaciones);
 		
-		mntmActividades = new JMenuItem("Actividades");
-		mntmActividades.setFont(new Font("Dialog", Font.BOLD, 12));
-		mnMenu.add(mntmActividades);
+		mntmActividades = new JMenuItem(ACTIVIDADES);
+		mntmActividades.setFont(new Font("Dialog", Font.PLAIN, 12));
+		mnMenu_1.add(mntmActividades);
 		
-		JMenuItem mntmPerfil = new JMenuItem("Perfil");
-		mntmPerfil.setFont(new Font("Dialog", Font.BOLD, 12));
-		mntmPerfil.setForeground(new Color(0, 0, 0));
-		mnMenu.add(mntmPerfil);
+		mntmPerfil = new JMenuItem(PERFIL);
+		mntmPerfil.setFont(new Font("Dialog", Font.PLAIN, 12));
+		mnMenu_1.add(mntmPerfil);
 		
-		JMenu mnSalir = new JMenu("Salir");
-		mnSalir.setFont(new Font("Arial", Font.BOLD, 12));
-		menuBar.add(mnSalir);
+		mnSalir = new JMenuItem(SALIR);
+		mnSalir.setFont(new Font("Dialog", Font.BOLD, 14));
+		menuBar_1.add(mnSalir);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 	}
-	
+
 	public void hacerVisible() {
 		setVisible(true);
 	}
-	
+
 	public void mostrarMensaje(String mensaje) {
 		JOptionPane.showMessageDialog(this, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
-
 	}
 
 	public void mostrarError(String error) {
 		JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
 	}
+
 	public void mostrarAlerta(String alerta) {
 		JOptionPane.showMessageDialog(this, alerta, "Error", JOptionPane.WARNING_MESSAGE);
 	}
+	
+	public boolean mostrarPregunta(String mensaje) {
+		if (JOptionPane.showConfirmDialog(this, mensaje, "Confirmación", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_NO_OPTION) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public void cargarPanel(JPanel panel) {
-		// TODO Auto-generated method stub
 		scrpContenedor.setViewportView(panel);
 	}
 }

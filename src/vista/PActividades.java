@@ -20,6 +20,8 @@ import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 
 public class PActividades extends JPanel {
+	public static final String CONSULTA = "Consulta";
+	public static final String UNIRSE = "Unirse";
 	private JTable table;
 	private JScrollPane scrollPane;
 	private DefaultTableModel model = new DefaultTableModel();
@@ -29,16 +31,17 @@ public class PActividades extends JPanel {
 	private JTextField txtTablaDescripcion;
 	private JComboBox cmbhoraIni;
 	private JButton btnConsulta;
+	private JButton btnUnirse;
 	public PActividades() {
 		setLayout(null);
 		init();
 	}
 
 	private void init() {
-		
+		setSize(1920, 1080);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 177, 549);
+		scrollPane.setBounds(0, 0, 475, 1080);
 		add(scrollPane);
 		
 		table = new JTable();
@@ -47,39 +50,40 @@ public class PActividades extends JPanel {
 		
 		cmbhoraIni = new JComboBox();
 		cmbhoraIni.setModel(new DefaultComboBoxModel(new String[] {"", "9:00 ", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"}));
-		cmbhoraIni.setBounds(316, 110, 87, 22);
+		cmbhoraIni.setBounds(712, 172, 279, 69);
 		add(cmbhoraIni);
 		
 		JLabel lblhoraIni = new JLabel("Hora de Inicio :");
-		lblhoraIni.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblhoraIni.setBounds(207, 110, 115, 22);
+		lblhoraIni.setFont(new Font("Dialog", Font.BOLD, 24));
+		lblhoraIni.setBounds(762, 95, 185, 84);
 		add(lblhoraIni);
 		
 		cmbhoraFin = new JComboBox();
 		cmbhoraFin.setModel(new DefaultComboBoxModel(new String[] {"", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00"}));
-		cmbhoraFin.setBounds(607, 110, 87, 22);
+		cmbhoraFin.setBounds(1398, 172, 279, 69);
 		add(cmbhoraFin);
 		
 		lblhoraFin = new JLabel("Hora Final :");
-		lblhoraFin.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblhoraFin.setBounds(524, 110, 87, 22);
+		lblhoraFin.setFont(new Font("Dialog", Font.BOLD, 24));
+		lblhoraFin.setBounds(1477, 95, 145, 84);
 		add(lblhoraFin);
 		
 		txtTablaDescripcion = new JTextField();
+		txtTablaDescripcion.setFont(new Font("Dialog", Font.PLAIN, 24));
 		txtTablaDescripcion.setEnabled(false);
 		txtTablaDescripcion.setEditable(false);
-		txtTablaDescripcion.setBounds(264, 183, 388, 177);
+		txtTablaDescripcion.setBounds(712, 315, 965, 537);
 		add(txtTablaDescripcion);
 		txtTablaDescripcion.setColumns(10);
 		
-		JButton btnUnirse = new JButton("Unirse");
-		btnUnirse.setFont(new Font("Dialog", Font.PLAIN, 14));
-		btnUnirse.setBounds(509, 417, 102, 30);
+		btnUnirse = new JButton(UNIRSE);
+		btnUnirse.setFont(new Font("Dialog", Font.PLAIN, 24));
+		btnUnirse.setBounds(1248, 914, 267, 77);
 		add(btnUnirse);
 		
-		btnConsulta = new JButton("Consulta");
-		btnConsulta.setFont(new Font("Dialog", Font.PLAIN, 14));
-		btnConsulta.setBounds(316, 417, 102, 30);
+		btnConsulta = new JButton(CONSULTA);
+		btnConsulta.setFont(new Font("Dialog", Font.PLAIN, 24));
+		btnConsulta.setBounds(890, 914, 267, 77);
 		add(btnConsulta);
 		
 		

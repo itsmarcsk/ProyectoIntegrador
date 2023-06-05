@@ -13,10 +13,10 @@ public class Cliente {
 	private String genero;
 	private String email;
 	private String contrasenia;
-	private int actividades;
-	private int reservas;
 	
+
 	
+
 	public Cliente(String nombre, String apellido, int diaNac, int mesNac, int anioNac, String dni, int prefijo,
 			int telefono, String genero, String email, String contrasenia) {
 		this.nombre = nombre;
@@ -30,25 +30,19 @@ public class Cliente {
 		this.genero = genero;
 		this.email = email;
 		this.contrasenia = contrasenia;
-		
 	}
-	
 
-	public Cliente(String nombre, String apellido, int diaNac, int mesNac, int anioNac, String dni, int prefijo,
-			int telefono, String genero, String email, String contrasenia, int actividades, int reservas) {
+
+
+
+	public Cliente(String nombre, String apellido, int diaNac, int mesNac, int anioNac, String dni, String email) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.diaNac = diaNac;
 		this.mesNac = mesNac;
 		this.anioNac = anioNac;
 		this.dni = dni;
-		this.prefijo = prefijo;
-		this.telefono = telefono;
-		this.genero = genero;
 		this.email = email;
-		this.contrasenia = contrasenia;
-		this.actividades = actividades;
-		this.reservas = reservas;
 	}
 
 
@@ -111,16 +105,4 @@ public class Cliente {
 	public String getContrasenia() {
 		return contrasenia;
 	}
-
-
-	public int getActividades() {
-		return actividades;
-	}
-
-
-	public int getReservas() {
-		return reservas;
-	}
-	
-	
 }

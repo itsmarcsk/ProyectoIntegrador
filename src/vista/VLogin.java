@@ -13,8 +13,11 @@ import java.awt.Toolkit;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+
 public class VLogin extends JFrame {
 
+	public static final String INICIO_SESION = "Inicio sesion";
+	public static final String REGISTRARSE = "Registrarse";
 	public static final int ANCHO = 700;
 	public static final int ALTO = 500;
 	private JPanel contentPane;
@@ -22,6 +25,8 @@ public class VLogin extends JFrame {
 	private JLabel lblContrasena;
 	private JTextField txtUsuario;
 	private JTextField txtPassword;
+	private JButton btnRegistro;
+	private JButton btnIniciarSesion;
 	public VLogin() {
 		super("LOGIN");
 		init();
@@ -41,41 +46,49 @@ public class VLogin extends JFrame {
 		lblLogin.setHorizontalTextPosition(SwingConstants.LEFT);
 		lblLogin.setEnabled(true);
 		lblLogin.setVerticalAlignment(SwingConstants.CENTER);
-		lblLogin.setBounds(290, 10, 179, 38);
+		lblLogin.setBounds(253, 27, 179, 38);
 		contentPane.add(lblLogin);
 		
 		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setBounds(363, 89, 45, 13);
+		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUsuario.setFont(new Font("Dialog", Font.PLAIN, 20));
+		lblUsuario.setBounds(253, 76, 179, 26);
 		contentPane.add(lblUsuario);
 		
 		lblContrasena = new JLabel("Contraseña");
+		lblContrasena.setFont(new Font("Dialog", Font.PLAIN, 20));
 		lblContrasena.setHorizontalAlignment(SwingConstants.CENTER);
-		lblContrasena.setBounds(332, 178, 96, 13);
+		lblContrasena.setBounds(242, 165, 199, 26);
 		contentPane.add(lblContrasena);
 		
 		txtUsuario = new JTextField();
+		txtUsuario.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtUsuario.setToolTipText("Escribe nombre usuario");
-		txtUsuario.setBounds(332, 112, 96, 19);
+		txtUsuario.setBounds(248, 112, 189, 42);
 		contentPane.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
 		txtPassword = new JTextField();
+		txtPassword.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtPassword.setToolTipText("Introduce contraseña");
-		txtPassword.setBounds(332, 201, 96, 19);
+		txtPassword.setBounds(247, 198, 189, 42);
 		contentPane.add(txtPassword);
 		txtPassword.setColumns(10);
 		
-		JButton btnIniciarSesion = new JButton("Inicio sesion");
-		btnIniciarSesion.setBounds(321, 251, 117, 21);
+		btnIniciarSesion = new JButton(INICIO_SESION);
+		btnIniciarSesion.setFont(new Font("Dialog", Font.PLAIN, 20));
+		btnIniciarSesion.setBounds(206, 268, 272, 60);
 		contentPane.add(btnIniciarSesion);
 		
-		JButton btnRegistro = new JButton("Registrarse");
-		btnRegistro.setBounds(332, 341, 85, 21);
+		btnRegistro = new JButton(REGISTRARSE);
+		btnRegistro.setFont(new Font("Dialog", Font.PLAIN, 20));
+		btnRegistro.setBounds(242, 399, 199, 38);
 		contentPane.add(btnRegistro);
 		String registro = "En caso de que se quiera registrar,\n pulse el botón de abajo";
-		JLabel lblRegistro = new JLabel(registro);
-		lblRegistro.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblRegistro.setBounds(195, 282, 314, 38);
+		JLabel lblRegistro = new JLabel("<html>\r\n<div center>\r\nEn caso de que se quiera registrar,\r\n<br>\r\n pulse el botón de abajo\r\n</div>\r\n</html>");
+		lblRegistro.setFont(new Font("Dialog", Font.PLAIN, 10));
+		lblRegistro.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRegistro.setBounds(214, 353, 256, 62);
 		contentPane.add(lblRegistro);
 		setSize(ANCHO, ALTO);
 		centrarVentana();
