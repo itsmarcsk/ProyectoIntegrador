@@ -243,7 +243,7 @@ public class Persistance {
 		public int actualizarDatos(String dni, Cliente c) {
 			String query = "UPDATE " + TABLA_CLI + " SET " + COL_NOMBRE_CLI + " = ?, " + COL_APELLIDO_CLI
 					+ " = ?, " + COL_DIA_NAC_CLI + " = ?, " + COL_MES_NAC_CLI + " = ?, " + COL_ANO_NAC_CLI + " = ?, " + COL_EMAIL_CLI
-					+ " = ? WHERE " + COL_DNI_CLI + " = ?";
+					+ " = ?" + COL_CONTRASENA_CLI + " = ?, " +   " WHERE " + COL_DNI_CLI + " = ?";
 			int res = 0;
 			Connection con = null;
 			PreparedStatement stmt = null;
@@ -256,6 +256,8 @@ public class Persistance {
 				stmt.setInt(4, c.getMesNac());
 				stmt.setInt(5, c.getAnioNac());
 				stmt.setString(6, c.getEmail());
+				stmt.setString(7, c.getContrasenia());
+				stmt.setNString(8, dni);
 				res = stmt.executeUpdate();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

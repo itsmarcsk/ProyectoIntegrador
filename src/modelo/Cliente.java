@@ -35,6 +35,18 @@ public class Cliente {
 
 
 
+	public Cliente(String nombre, String apellido, int diaNac, int mesNac, int anioNac, String dni, String email, String contrasenia) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.diaNac = diaNac;
+		this.mesNac = mesNac;
+		this.anioNac = anioNac;
+		this.dni = dni;
+		this.email = email;
+		this.contrasenia = contrasenia;
+	}
+
+
 	public Cliente(String nombre, String apellido, int diaNac, int mesNac, int anioNac, String dni, String email) {
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -44,6 +56,8 @@ public class Cliente {
 		this.dni = dni;
 		this.email = email;
 	}
+
+
 
 
 	public Cliente(String dni, String contrasenia) {
