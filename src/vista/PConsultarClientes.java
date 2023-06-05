@@ -33,7 +33,7 @@ Create the panel.*/
         add(lblClientes);
 
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(23, 122, 393, 129);
+        scrollPane.setBounds(23, 122, 611, 294);
         add(scrollPane);
 
         JTable table = new JTable();
