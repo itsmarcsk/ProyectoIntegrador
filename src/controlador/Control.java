@@ -9,6 +9,7 @@ import javax.swing.JMenuItem;
 import db.Persistance;
 import vista.PActividadAdmin;
 import vista.PActividades;
+import vista.PAniadirModificar;
 import vista.PClientes;
 import vista.PConsultarClientes;
 import vista.PPerfil;
@@ -29,14 +30,10 @@ public class Control implements ActionListener{
 	private PClientes pC;
 	private PActividadAdmin pAA;
 	private Persistance pers;
-
-	
-	
-	
-
+	private PAniadirModificar pAM;
 
 	public Control(VLogin vLogin, VRegistro vRegistro, VPrincipalAdmin vPA, VPrincipalCliente vPC, PActividades pA,
-			PPerfil pP, PConsultarClientes pCC, PClientes pC, PActividadAdmin pAA) {
+			PPerfil pP, PConsultarClientes pCC, PClientes pC, PActividadAdmin pAA, PAniadirModificar pAM) {
 		this.vLogin = vLogin;
 		this.vRegistro = vRegistro;
 		this.vPA = vPA;
@@ -46,50 +43,59 @@ public class Control implements ActionListener{
 		this.pCC = pCC;
 		this.pC = pC;
 		this.pAA = pAA;
+		this.pAM = pAM;
 		pers = new Persistance();
 	}
-
-
-
-
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() instanceof JMenuItem) {
-			if (e.getActionCommand().equals(vPC.INSTALACIONES)) {
+			if (e.getActionCommand().equals(VPrincipalCliente.INSTALACIONES)) {
 
-			} else if (e.getActionCommand().equals(vPC.ACTIVIDADES)) {
+			} else if (e.getActionCommand().equals(VPrincipalCliente.ACTIVIDADES)) {
 				vPC.cargarPanel(PA);
 				
-			} else if (e.getActionCommand().equals(vPC.PERFIL)) {
+			} else if (e.getActionCommand().equals(VPrincipalCliente.PERFIL)) {
 				vPC.cargarPanel(PP);
 				
-			} else if (e.getActionCommand().equals(vPC.SALIR)) {
+			} else if (e.getActionCommand().equals(VPrincipalCliente.SALIR)) {
+				if (vPC.mostrarPregunta("Se va a cerrar la aplicación, ¿desea continuar?")) {
+					System.exit(0);
+				}
+			} else if (e.getActionCommand().equals(VPrincipalAdmin.MODIFICACION)) {
+				
+			} else if (e.getActionCommand().equals(VPrincipalAdmin.REGISTRO)) {
+				
+			} else if (e.getActionCommand().equals(VPrincipalAdmin.SALIR)) {
 				if (vPC.mostrarPregunta("Se va a cerrar la aplicación, ¿desea continuar?")) {
 					System.exit(0);
 				}
 			}
 		} else if (e.getSource() instanceof JButton) {
-			//PANEL PERFIL
-			if (e.getActionCommand().equals(PP.CONSULTAR_ACTIVIDAD)) {
+			//TODO PANEL PERFIL
+			if (e.getActionCommand().equals(PPerfil.CONSULTAR_ACTIVIDAD)) {
 				
-			} else if (e.getActionCommand().equals(PP.BORRAR_ACTIVIDAD)) {
+			} else if (e.getActionCommand().equals(PPerfil.BORRAR_ACTIVIDAD)) {
 				
-			} else if (e.getActionCommand().equals(PP.BORRAR_CUENTA)) {
+			} else if (e.getActionCommand().equals(PPerfil.BORRAR_CUENTA)) {
 				
-			} else if (e.getActionCommand().equals(PP.GUARDAR_CAMBIOS)) {
+			} else if (e.getActionCommand().equals(PPerfil.GUARDAR_CAMBIOS)) {
 				
-			//PANEL ACTIVIDADES
-			} else if (e.getActionCommand().equals(PA.UNIRSE)) {
+			//TODO PANEL ACTIVIDADES
+			} else if (e.getActionCommand().equals(PActividades.UNIRSE)) {
 				
-			} else if (e.getActionCommand().equals(PA.CONSULTA)) {
+			} else if (e.getActionCommand().equals(PActividades.CONSULTA)) {
 				
-			//VENTANA LOGIN
-			} else if (e.getActionCommand().equals(vLogin.INICIO_SESION)) {
+			//TODO PANEL AÑADIR MODIFICAR ACTIVIDAD
+			} else if (e.getActionCommand().equals(PAniadirModificar.ANIADIR_ACTIVIDAD)) {
 				
-			} else if (e.getActionCommand().equals(vLogin.REGISTRARSE)) {
+			} else if (e.getActionCommand().equals(PAniadirModificar.MODIFICAR_ACTIVIDAD)) {
+				
+			//TODO VENTANA LOGIN
+			} else if (e.getActionCommand().equals(VLogin.INICIO_SESION)) {
+				
+			} else if (e.getActionCommand().equals(VLogin.REGISTRARSE)) {
 				
 			}
 		}

@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import vista.PActividadAdmin;
 import vista.PActividades;
+import vista.PAniadirModificar;
 import vista.PClientes;
 import vista.PConsultarClientes;
 import vista.PPerfil;
@@ -30,7 +31,8 @@ public class Inicio {
 				PPerfil pP = new PPerfil();
 				PClientes pC = new PClientes();
 				PActividadAdmin pAA = new PActividadAdmin();
-				Control control = new Control(vLogin, vRegistro, vPA, vPC, PA, pP, pCC , pC, pAA);
+				PAniadirModificar pAM = new PAniadirModificar();
+				Control control = new Control(vLogin, vRegistro, vPA, vPC, PA, pP, pCC , pC, pAA, pAM);
 				vLogin.hacerVisible();
 			}
 		});
