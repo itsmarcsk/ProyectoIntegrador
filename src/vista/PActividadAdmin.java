@@ -1,12 +1,11 @@
 package vista;
 
-import javax.swing.JPanel;
-import javax.swing.JOptionPane;
-import javax.swing.JButton;
 import java.awt.Font;
 import java.util.ArrayList;
 
-import javax.swing.JScrollBar;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,7 +16,7 @@ public class PActividadAdmin extends JPanel{
 	private JButton btnModificar;
 	private DefaultTableModel model = new DefaultTableModel();
 	public String[] column = new String[] { "NOMBRE", "PRECIO" ,"DESCRIPCION"};
-	private JScrollBar scrollBar;
+	private JScrollPane scrollPane;
 	private JTable table;
 	public PActividadAdmin() {
 		
@@ -27,24 +26,25 @@ public class PActividadAdmin extends JPanel{
 		
 	}
 	private void init() {
+		setSize(1920, 1080);
 		
 		btnModificar = new JButton("Modificar");
-		btnModificar.setFont(new Font("Tahoma", Font.BOLD, 10));
-		btnModificar.setBounds(47, 246, 85, 21);
+		btnModificar.setFont(new Font("Dialog", Font.BOLD, 24));
+		btnModificar.setBounds(477, 926, 244, 81);
 		add(btnModificar);
 		
 		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 10));
-		btnEliminar.setBounds(268, 246, 85, 21);
+		btnEliminar.setFont(new Font("Dialog", Font.BOLD, 24));
+		btnEliminar.setBounds(1198, 926, 244, 81);
 		add(btnEliminar);
 		
-		scrollBar = new JScrollBar();
-		scrollBar.setBounds(433, 10, 17, 300);
-		add(scrollBar);
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(161, 110, 1597, 752);
+		add(scrollPane);
 		
 		table = new JTable();
-		table.setBounds(370, 184, -315, -151);
-		add(table);
+		scrollPane.setViewportView(table);
+		configurarTabla();
 	}
 	public void configurarTabla() {
 		model = new DefaultTableModel() {
