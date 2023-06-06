@@ -11,9 +11,11 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class PClientes extends JPanel {
+	public static final String BUSCAR = "Buscar";
 	private JTextField txtBuscar;
 	private JTable tblClientes;
 	private DefaultTableModel dtm;
+	private JButton btnBuscar;
 	public PClientes() {
 		init();
 
@@ -43,7 +45,7 @@ public class PClientes extends JPanel {
 		add(txtBuscar);
 		txtBuscar.setColumns(10);
 		
-		JButton btnBuscar = new JButton("Buscar\r\n");
+		btnBuscar = new JButton(BUSCAR);
 		btnBuscar.setFont(new Font("Dialog", Font.PLAIN, 20));
 		btnBuscar.setBounds(1650, 88, 195, 64);
 		add(btnBuscar);

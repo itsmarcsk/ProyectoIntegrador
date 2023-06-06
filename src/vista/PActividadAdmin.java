@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Actividad;
 
 public class PActividadAdmin extends JPanel{
+	public static final String ELIMINAR = "Eliminar";
+	public static final String MODIFICAR = "Modificar";
 	private JButton btnEliminar;
 	private JButton btnModificar;
 	private DefaultTableModel model = new DefaultTableModel();
@@ -28,12 +30,12 @@ public class PActividadAdmin extends JPanel{
 	private void init() {
 		setSize(1920, 1080);
 		
-		btnModificar = new JButton("Modificar");
+		btnModificar = new JButton(MODIFICAR);
 		btnModificar.setFont(new Font("Dialog", Font.BOLD, 24));
 		btnModificar.setBounds(477, 926, 244, 81);
 		add(btnModificar);
 		
-		btnEliminar = new JButton("Eliminar");
+		btnEliminar = new JButton(ELIMINAR);
 		btnEliminar.setFont(new Font("Dialog", Font.BOLD, 24));
 		btnEliminar.setBounds(1198, 926, 244, 81);
 		add(btnEliminar);

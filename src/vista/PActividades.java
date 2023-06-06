@@ -20,7 +20,7 @@ import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 
 public class PActividades extends JPanel {
-	public static final String CONSULTA = "Consulta";
+	public static final String CONSULTA = "Consultar";
 	public static final String UNIRSE = "Unirse";
 	private JTable table;
 	private JScrollPane scrollPane;

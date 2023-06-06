@@ -4,8 +4,10 @@ package vista;
 import java.awt.Color;
 import java.awt.Font;
 
-import javax.swing.Icon;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -13,9 +15,6 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 
 
 public class VPrincipalAdmin extends JFrame {
@@ -40,6 +39,7 @@ public class VPrincipalAdmin extends JFrame {
 		this.setExtendedState(this.MAXIMIZED_BOTH);
 	}
 	private void init() {
+		setSize(1920, 1080);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

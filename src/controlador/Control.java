@@ -97,6 +97,9 @@ public class Control implements ActionListener{
 				
 			} else if (e.getActionCommand().equals(VLogin.REGISTRARSE)) {
 				
+			//TODO VENTANA PCLIENTE
+			} else if (e.getActionCommand().equals(PClientes.BUSCAR)) {
+				
 			}
 		}
 	}
