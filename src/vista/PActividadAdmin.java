@@ -61,6 +61,7 @@ public class PActividadAdmin extends JPanel{
 		};
 		model.addColumn(column[0]);
 		model.addColumn(column[1]);
+		model.addColumn(column[2]);
 		
 
 		table.setModel(model);
