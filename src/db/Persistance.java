@@ -23,18 +23,17 @@ public class Persistance {
 	static final String COL_DIA_NAC_CLI = "DIA_NAC";
 	static final String COL_MES_NAC_CLI = "MES_NAC";
 	static final String COL_ANO_NAC_CLI = "ANO_NAC";
-	static final String COL_PREFIJO_NUM_CLI = "PREFIJO_NUM";
-	static final String COL_NUM_TEL_CLI = "NUM_TEL";
-	static final String COL_CONTRASENA_CLI = "CONTRASENA";
+	static final String COL_PREFIJO_NUM_CLI = "PREFIJO NUMERO";
+	static final String COL_NUM_TEL_CLI = "NUMERO DE TELEFONO";
+	static final String COL_CONTRASENA_CLI = "CONTRASEÑA";
 	static final String COL_EMAIL_CLI = "EMAIL";
 	static final String COL_GENERO_CLI = "GENERO";
 	static final String TABLA_CLIENTES_ACTIVIDADES = "Clientes_Actividades";
-	static final String COL_ID_CLI_ACT = "ID";
+	static final String COL_NOMBRE_CLI_ACT = "NOMBRE";
 	static final String COL_DNI_CLI_ACT = "DNI";
 	static final String COL_HORARIO_INI = "HORARIO_INI";
 	static final String COL_HORARIO_FIN = "HORARIO_FIN";
 	static final String TABLA_ACTIVIDADES = "Actividades";
-	static final String COL_ID_ACTI = "ID";
 	static final String COL_PRECIO_ACTI = "PRECIO";
 	static final String COL_NOM_ACTI = "NOMBRE";
 	static final String COL_DES_ACT = "DESCRIPCION";
@@ -165,8 +164,48 @@ public class Persistance {
 		}
 		return c;
 	}
+	public ArrayList<Cliente> consultarClientes(String nombre) {
+		String query = "SELECT * FROM " + TABLA_CLI + " WHERE " + COL_NOMBRE_CLI + " LIKE ?";
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rslt = null;
+		ArrayList<Cliente> listaClientes = new ArrayList<>();
+		try {
+			con = aDB.getConnection();
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, nombre);
+			rslt = stmt.executeQuery();
+			while (rslt.next()) {
+				listaClientes.add(new Cliente(rslt.getString(COL_NOMBRE_CLI), rslt.getString(COL_APELLIDO_CLI), rslt.getInt(COL_DIA_NAC_CLI), rslt.getInt(COL_MES_NAC_CLI), rslt.getInt(COL_ANO_NAC_CLI), rslt.getString(COL_DNI_CLI), rslt.getInt(COL_PREFIJO_NUM_CLI), rslt.getInt(COL_NUM_TEL_CLI), rslt.getString(COL_GENERO_CLI), rslt.getString(COL_EMAIL_CLI)));
+			}
+		
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rslt != null) {
+					rslt.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+		return listaClientes;
+	}
 	public Actividad consultarActividadesCliente(String dni) {
-		String query = "SELECT " + COL_NOM_ACTI + ", " + COL_PRECIO_ACTI + ", " + COL_DES_ACT + " FROM " + TABLA_ACTIVIDADES + " WHERE " + COL_ID_ACTI + " = SELECT " + COL_ID_CLI_ACT + " FROM " + TABLA_CLIENTES_ACTIVIDADES + " WHERE " + COL_DNI_CLI + " = ?";
+		String query = "SELECT " + COL_NOM_ACTI + ", " + COL_PRECIO_ACTI + ", " + COL_DES_ACT + " FROM " + TABLA_ACTIVIDADES + " WHERE " + COL_NOM_ACTI + " = SELECT " + COL_NOMBRE_CLI_ACT + " FROM " + TABLA_CLIENTES_ACTIVIDADES + " WHERE " + COL_DNI_CLI + " = ?";
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rslt = null;
@@ -277,48 +316,6 @@ public class Persistance {
 		}
 		return c;
 	}
-	
-	public ArrayList<Cliente> consultarClientes(String nombre) {
-        String query = "SELECT * FROM " + TABLA_CLI + " WHERE " + COL_NOMBRE_CLI + " LIKE ?";
-        Connection con = null;
-        PreparedStatement stmt = null;
-        ResultSet rslt = null;
-        ArrayList<Cliente> listaClientes = new ArrayList<>();
-        try {
-            con = aDB.getConnection();
-            stmt = con.prepareStatement(query);
-            stmt.setString(1, nombre);
-            rslt = stmt.executeQuery();
-            while (rslt.next()) {
-                listaClientes.add(new Cliente(rslt.getString(COL_NOMBRE_CLI), rslt.getString(COL_APELLIDO_CLI), rslt.getInt(COL_DIA_NAC_CLI), rslt.getInt(COL_MES_NAC_CLI), rslt.getInt(COL_ANO_NAC_CLI), rslt.getString(COL_DNI_CLI), rslt.getInt(COL_PREFIJO_NUM_CLI), rslt.getInt(COL_NUM_TEL_CLI), rslt.getString(COL_GENERO_CLI), rslt.getString(COL_EMAIL_CLI)));
-            }
-        
-            
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rslt != null) {
-                    rslt.close();
-                }
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                // TODO: handle exception
-                e.printStackTrace();
-            }
-        }
-        return listaClientes;
-    }
-	
 	public int modificarActividad(Actividad c) {
 		String query = "UPDATE " + TABLA_ACTIVIDADES + " SET " + COL_PRECIO_ACTI
 				+ " = ?, " + COL_DES_ACT + " = ? " +   " WHERE " + COL_NOM_ACTI + " = ?";

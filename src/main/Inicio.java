@@ -7,6 +7,7 @@ import vista.PActividades;
 import vista.PAniadirModificar;
 import vista.PClientes;
 import vista.PConsultarClientes;
+import vista.PInstalaciones;
 import vista.PPerfil;
 import vista.VLogin;
 import vista.VPrincipalAdmin;
@@ -32,7 +33,8 @@ public class Inicio {
 				PClientes pC = new PClientes();
 				PActividadAdmin pAA = new PActividadAdmin();
 				PAniadirModificar pAM = new PAniadirModificar();
-				Control control = new Control(vLogin, vRegistro, vPA, vPC, PA, pP, pCC , pC, pAA, pAM);
+				PInstalaciones pI = new PInstalaciones();
+				Control control = new Control(vLogin, vRegistro, vPA, vPC, PA, pP, pCC , pC, pAA, pAM, pI);
 				
 				
 				

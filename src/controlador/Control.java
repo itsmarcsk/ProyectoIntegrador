@@ -14,6 +14,7 @@ import vista.PActividades;
 import vista.PAniadirModificar;
 import vista.PClientes;
 import vista.PConsultarClientes;
+import vista.PInstalaciones;
 import vista.PPerfil;
 import vista.VLogin;
 import vista.VPrincipalAdmin;
@@ -33,9 +34,10 @@ public class Control implements ActionListener{
 	private PActividadAdmin pAA;
 	private Persistance pers;
 	private PAniadirModificar pAM;
-
+	private PInstalaciones pI;
+	
 	public Control(VLogin vLogin, VRegistro vRegistro, VPrincipalAdmin vPA, VPrincipalCliente vPC, PActividades pA,
-			PPerfil pP, PConsultarClientes pCC, PClientes pC, PActividadAdmin pAA, PAniadirModificar pAM) {
+			PPerfil pP, PConsultarClientes pCC, PClientes pC, PActividadAdmin pAA, PAniadirModificar pAM, PInstalaciones pI) {
 		this.vLogin = vLogin;
 		this.vRegistro = vRegistro;
 		this.vPA = vPA;
@@ -46,6 +48,7 @@ public class Control implements ActionListener{
 		this.pC = pC;
 		this.pAA = pAA;
 		this.pAM = pAM;
+		this.pI = pI;
 		pers = new Persistance();
 	}
 
@@ -54,7 +57,7 @@ public class Control implements ActionListener{
 		// TODO Auto-generated method stub
 		if (e.getSource() instanceof JMenuItem) {
 			if (e.getActionCommand().equals(VPrincipalCliente.INSTALACIONES)) {
-
+				vPC.cargarPanel(pI);
 			} else if (e.getActionCommand().equals(VPrincipalCliente.ACTIVIDADES)) {
 				vPC.cargarPanel(PA);
 				
@@ -68,7 +71,8 @@ public class Control implements ActionListener{
 			} else if (e.getActionCommand().equals(VPrincipalAdmin.CONSULTAR)) {
 				vPA.cargarPanel(pAA);
 			} else if (e.getActionCommand().equals(VPrincipalAdmin.ANIADIR_ACT)) {
-				
+				pAM.aniadir();
+				vPA.cargarPanel(pAM);
 			} else if (e.getActionCommand().equals(VPrincipalAdmin.SALIR)) {
 				if (vPC.mostrarPregunta("Se va a cerrar la aplicación, ¿desea continuar?")) {
 					System.exit(0);
