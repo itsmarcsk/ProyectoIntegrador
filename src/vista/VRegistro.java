@@ -1,6 +1,8 @@
 package vista;
 
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -11,9 +13,14 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import controlador.Control;
 import modelo.Cliente;
 
 public class VRegistro extends JFrame {
+	private static final int ALTO = 800;
+	private static final int ANCHO = 700;
+	public static final String CANCELAR = "Cancelar";
+	public static final String CREAR_CUENTA = "Crear Cuenta";
 	private JTextField txtApellido;
 	private JTextField txtDni;
 	private JTextField txtTelef;
@@ -39,7 +46,7 @@ public class VRegistro extends JFrame {
 
 	private void init() {
 		// TODO Auto-generated method stub
-		setSize(700, 800);
+		setSize(ANCHO, ALTO);
 		getContentPane().setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("REGISTRO");
@@ -122,12 +129,12 @@ public class VRegistro extends JFrame {
 		txtEmail.setBounds(132, 420, 523, 59);
 		getContentPane().add(txtEmail);
 
-		btnCrearCuenta = new JButton("Crear Cuenta");
+		btnCrearCuenta = new JButton(CREAR_CUENTA);
 		btnCrearCuenta.setFont(new Font("Dialog", Font.PLAIN, 20));
 		btnCrearCuenta.setBounds(68, 668, 253, 59);
 		getContentPane().add(btnCrearCuenta);
 
-		btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton(CANCELAR);
 		btnCancelar.setFont(new Font("Dialog", Font.PLAIN, 20));
 		btnCancelar.setBounds(393, 668, 253, 59);
 		getContentPane().add(btnCancelar);
@@ -186,14 +193,30 @@ public class VRegistro extends JFrame {
 				"421", "46", "41", "90", "380", "379" }));
 		cmbPrefijo.setBounds(372, 264, 72, 59);
 		getContentPane().add(cmbPrefijo);
+		centrarVentana();
+	}
+	private void centrarVentana() {
+		// TODO Auto-generated method stub
+		// Se obtienen las dimensiones en pixels de la pantalla.
+		Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+		// Crear un objeto de tipo Dimension con las medidas en pixels de la ventana.
+		Dimension ventana = new Dimension(ANCHO, ALTO);
+		// Una cuenta para situar la ventana en el centro de la pantalla.
+		setLocation((pantalla.width - ventana.width) / 2, (pantalla.height - ventana.height) / 2);
 	}
 
 	private String[] obtenerAnios() {
-		String[] aniosA = new String[104];
-		for (int i = 1920; i < 2024; i++) {
-			aniosA[i - 1920] = "" + i;
-		}
-		return aniosA;
+	    String[] aniosA = new String[74];
+	    for (int i = 1950; i < 2024; i++) {
+	        aniosA[i - 1950] = "" + i;
+	    }
+	    
+	    for (int i = 0; i < aniosA.length / 2; i++) {
+	        String temp = aniosA[i];
+	        aniosA[i] = aniosA[aniosA.length - i - 1];
+	        aniosA[aniosA.length - i - 1] = temp;
+	    }
+	    return aniosA;
 	}
 
 	public Cliente getDatos() {
@@ -255,6 +278,15 @@ public class VRegistro extends JFrame {
 			
 			return null;
 		}
+	}
+
+	public void hacerVisible() {
+		setVisible(true);
+	}
+
+	public void setListener(Control control) {
+		btnCancelar.addActionListener(control);
+		btnCrearCuenta.addActionListener(control);
 	}
 	
 

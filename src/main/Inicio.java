@@ -33,6 +33,19 @@ public class Inicio {
 				PActividadAdmin pAA = new PActividadAdmin();
 				PAniadirModificar pAM = new PAniadirModificar();
 				Control control = new Control(vLogin, vRegistro, vPA, vPC, PA, pP, pCC , pC, pAA, pAM);
+				
+				
+				
+				vLogin.setListener(control);
+				vRegistro.setListener(control);
+				vPA.setListener(control);
+                vPC.setListener(control);
+                PA.setListener(control);
+                pP.setListener(control);
+                pC.setListener(control);
+                pAA.setListener(control);
+                pAM.setListener(control);
+				
 				vLogin.hacerVisible();
 			}
 		});

@@ -18,6 +18,8 @@ import java.util.Date;
 import java.util.Calendar;
 import javax.swing.SpinnerNumberModel;
 
+import controlador.Control;
+
 public class PPerfil extends JPanel {
 	public static final String BORRAR_ACTIVIDAD = "Borrar Actividad";
 	public static final String CONSULTAR_ACTIVIDAD = "Consultar Actividad";
@@ -35,7 +37,7 @@ public class PPerfil extends JPanel {
 	private JButton btnGuardarCambios;
 	private JButton btnBorrarCuenta;
 	private Persistance Pers;
-	private VLogin VLogin;
+	private VLogin vLogin;
 	private JTextField txtApellidos;
 	private VPrincipalCliente VPC;
 	private JSpinner spnAnio;
@@ -43,6 +45,7 @@ public class PPerfil extends JPanel {
 	private JSpinner spnDia;
 	
 	public PPerfil() {
+		vLogin = new VLogin();
 		Pers = new Persistance();
 		init();
 		
@@ -206,7 +209,7 @@ public class PPerfil extends JPanel {
 
 
 	private void rellenarDatosPersonales() {
-		Cliente c = Pers.consultarDatos(VLogin.getUsuario());
+		Cliente c = Pers.consultarDatos(vLogin.getUsuario());
 		
 		txtNombre.setText(c.getNombre());
 		txtNombre.setText(c.getApellido());
@@ -244,5 +247,13 @@ public class PPerfil extends JPanel {
 		}
 		
 		return new Cliente(nombre, apellidos,dia, mes, anio, dni, email ,contra);
+	}
+
+
+	public void setListener(Control control) {
+		btnBorrarActividad.addActionListener(control);
+		btnBorrarCuenta.addActionListener(control);
+		btnConsultar.addActionListener(control);
+		btnGuardarCambios.addActionListener(control);
 	}
 }

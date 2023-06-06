@@ -4,6 +4,9 @@ package vista;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controlador.Control;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
@@ -27,6 +30,7 @@ public class VLogin extends JFrame {
 	private JTextField txtPassword;
 	private JButton btnRegistro;
 	private JButton btnIniciarSesion;
+	
 	public VLogin() {
 		super("LOGIN");
 		init();
@@ -113,5 +117,9 @@ public class VLogin extends JFrame {
 	public String getPassword() {
 		String password = txtPassword.getText();
 		return password;
+	}
+	public void setListener(Control control) {
+		btnIniciarSesion.addActionListener(control);
+		btnRegistro.addActionListener(control);
 	}
 }

@@ -6,6 +6,10 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+
+import controlador.Control;
+import modelo.Actividad;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
@@ -16,7 +20,7 @@ public class PAniadirModificar extends JPanel {
 	private String aniadirModificarBoton = "";
 	private JTextField txtNombre;
 	private JTextArea txtaDescripcion;
-	private JButton btnModificar;
+	private JButton btnModificarAniadir;
 	private JSpinner spnPrecio;
 	public PAniadirModificar() {
 		init();
@@ -50,7 +54,7 @@ public class PAniadirModificar extends JPanel {
 		
 		spnPrecio = new JSpinner();
 		spnPrecio.setFont(new Font("Dialog", Font.PLAIN, 20));
-		spnPrecio.setModel(new SpinnerNumberModel(10,139, 50, 1));
+		spnPrecio.setModel(new SpinnerNumberModel(10,10, 50, 1));
 		spnPrecio.setBounds(1098, 78, 227, 90);
 		add(spnPrecio);
 		
@@ -61,17 +65,45 @@ public class PAniadirModificar extends JPanel {
 		txtaDescripcion = new JTextArea();
 		scrpDescripcion.setViewportView(txtaDescripcion);
 		
-		btnModificar = new JButton(aniadirModificarBoton);
-		btnModificar.setFont(new Font("Dialog", Font.BOLD, 20));
-		btnModificar.setBounds(1525, 981, 323, 67);
-		add(btnModificar);
+		btnModificarAniadir = new JButton(aniadirModificarBoton);
+		btnModificarAniadir.setFont(new Font("Dialog", Font.BOLD, 20));
+		btnModificarAniadir.setBounds(1525, 981, 323, 67);
+		add(btnModificarAniadir);
 	}
 	
 	public void modificar() {
 		aniadirModificarBoton = MODIFICAR_ACTIVIDAD;
+		txtNombre.setEnabled(false);
 	}
 	
 	public void aniadir() {
 		aniadirModificarBoton = ANIADIR_ACTIVIDAD;
+		txtNombre.setEnabled(true);
+	}
+
+	public void rellenarDatos(Actividad c) {
+		txtNombre.setText(c.getNombre());
+		spnPrecio.setValue(c.getPrecio());
+		txtaDescripcion.setText(c.getDescripcion());
+	}
+	
+	public Actividad getDatos() {
+		String nombre = txtNombre.getText();
+		
+		int precio = (int) spnPrecio.getValue();
+		
+		String desc = txtaDescripcion.getText();
+		if (desc.isBlank()) {
+			return null;
+		} else if (nombre.isBlank()){
+			return null;
+		} else {
+			return new Actividad(nombre, precio, desc);
+		}
+	}
+
+	public void setListener(Control control) {
+		// TODO Auto-generated method stub
+		btnModificarAniadir.addActionListener(control);
 	}
 }

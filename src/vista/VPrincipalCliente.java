@@ -10,6 +10,8 @@ import javax.swing.JMenu;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import controlador.Control;
+
 import java.awt.Font;
 
 public class VPrincipalCliente extends JFrame {
@@ -94,5 +96,12 @@ public class VPrincipalCliente extends JFrame {
 
 	public void cargarPanel(JPanel panel) {
 		scrpContenedor.setViewportView(panel);
+	}
+
+	public void setListener(Control control) {
+		mnSalir.addActionListener(control);
+		mntmActividades.addActionListener(control);
+		mntmInstalaciones.addActionListener(control);
+		mntmPerfil.addActionListener(control);
 	}
 }

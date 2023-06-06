@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JMenuItem;
 
 import db.Persistance;
+import modelo.Actividad;
+import modelo.Cliente;
 import vista.PActividadAdmin;
 import vista.PActividades;
 import vista.PAniadirModificar;
@@ -63,9 +65,9 @@ public class Control implements ActionListener{
 				if (vPC.mostrarPregunta("Se va a cerrar la aplicación, ¿desea continuar?")) {
 					System.exit(0);
 				}
-			} else if (e.getActionCommand().equals(VPrincipalAdmin.MODIFICACION)) {
-				
-			} else if (e.getActionCommand().equals(VPrincipalAdmin.REGISTRO)) {
+			} else if (e.getActionCommand().equals(VPrincipalAdmin.CONSULTAR)) {
+				vPA.cargarPanel(pAA);
+			} else if (e.getActionCommand().equals(VPrincipalAdmin.ANIADIR_ACT)) {
 				
 			} else if (e.getActionCommand().equals(VPrincipalAdmin.SALIR)) {
 				if (vPC.mostrarPregunta("Se va a cerrar la aplicación, ¿desea continuar?")) {
@@ -91,14 +93,50 @@ public class Control implements ActionListener{
 			} else if (e.getActionCommand().equals(PAniadirModificar.ANIADIR_ACTIVIDAD)) {
 				
 			} else if (e.getActionCommand().equals(PAniadirModificar.MODIFICAR_ACTIVIDAD)) {
+				Actividad c = pAM.getDatos();
+				if (c == null) {
+					vPA.mostrarError("No se han introducido todos los campos");
+				} else {
+					pers.modificarActividad(c);
+				}
+				
+				
+			//TODO PANEL PCLIENTE
+			} else if (e.getActionCommand().equals(PClientes.BUSCAR)) {
+				
+				pers.consultarClientes(pC.getNombre());
 				
 			//TODO VENTANA LOGIN
+			} else if (e.getActionCommand().equals(VRegistro.CANCELAR)) {
+				
+				vRegistro.dispose();
+				vLogin.hacerVisible();
+				
+			} else if (e.getActionCommand().equals(VRegistro.CREAR_CUENTA)) {
+				
+				Cliente c = vRegistro.getDatos();
+				pers.registrarCliente(c);
+				
 			} else if (e.getActionCommand().equals(VLogin.INICIO_SESION)) {
+				
+				
 				
 			} else if (e.getActionCommand().equals(VLogin.REGISTRARSE)) {
 				
-			//TODO VENTANA PCLIENTE
-			} else if (e.getActionCommand().equals(PClientes.BUSCAR)) {
+				vLogin.dispose();
+				vRegistro.hacerVisible();
+				
+			} else if (e.getActionCommand().equals(PActividadAdmin.MODIFICAR)) {
+				
+				String nombre = pAA.getNombre();
+				
+				Actividad c = pers.consultarActividadesTodos(nombre);
+				
+				pAM.rellenarDatos(c);
+				
+				pAM.modificar();
+				vPA.cargarPanel(pAM);
+			} else if (e.getActionCommand().equals(PActividadAdmin.ELIMINAR)) {
 				
 			}
 		}

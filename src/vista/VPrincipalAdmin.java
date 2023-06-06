@@ -16,12 +16,13 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import controlador.Control;
+
 
 public class VPrincipalAdmin extends JFrame {
 
 	private JPanel contentPane;
 	private JMenuItem mntmOpcionModificacion;
-	private JMenuItem mntmOpcionEliminar;
 	private JScrollPane scrpContenedor;
 	private JSeparator separator_2;
 	private JMenuItem mntmOpcionRegistro;
@@ -29,8 +30,8 @@ public class VPrincipalAdmin extends JFrame {
 	private JSeparator separator;
 	private JMenuItem mnMenuSalir;
 	public static final String SALIR = "Salir";
-	public static final String REGISTRO = "Añadir actividad";
-	public static final String MODIFICACION = "Consultar actividad";
+	public static final String ANIADIR_ACT = "Añadir actividad";
+	public static final String CONSULTAR = "Consultar actividad";
 
 	private static final String CONSULTA = "Consulta";
 	public VPrincipalAdmin() {
@@ -50,7 +51,7 @@ public class VPrincipalAdmin extends JFrame {
 	private void configurarMenu() {
 		// TODO Auto-generated method stub
 		JMenuBar mnbBarraMenu = new JMenuBar();
-		mnbBarraMenu.setFont(new Font("Arial", Font.PLAIN, 12));
+		mnbBarraMenu.setFont(new Font("Dialog", Font.PLAIN, 12));
 		setJMenuBar(mnbBarraMenu);
 
 		JMenu mnMenu1 = new JMenu("Actividades");
@@ -67,17 +68,17 @@ public class VPrincipalAdmin extends JFrame {
 		mnMenuSalir.setFont(new Font("Dialog", Font.BOLD, 14));
 		mnbBarraMenu.add(mnMenuSalir);
 
-		mntmOpcionRegistro = new JMenuItem(REGISTRO);
+		mntmOpcionRegistro = new JMenuItem(ANIADIR_ACT);
 		mntmOpcionRegistro.setHorizontalAlignment(SwingConstants.LEFT);
-		mntmOpcionRegistro.setFont(new Font("Arial", Font.PLAIN, 12));
+		mntmOpcionRegistro.setFont(new Font("Dialog", Font.PLAIN, 12));
 		mnMenu1.add(mntmOpcionRegistro);
 
 		separator = new JSeparator();
 
 		mnMenu1.add(separator);
-		mntmOpcionModificacion = new JMenuItem(MODIFICACION);
+		mntmOpcionModificacion = new JMenuItem(CONSULTAR);
 		mntmOpcionModificacion.setHorizontalAlignment(SwingConstants.LEFT);
-		mntmOpcionModificacion.setFont(new Font("Arial", Font.PLAIN, 12));
+		mntmOpcionModificacion.setFont(new Font("Dialog", Font.PLAIN, 12));
 		mnMenu1.add(mntmOpcionModificacion);
 
 //		separator_2 = new JSeparator();
@@ -85,7 +86,7 @@ public class VPrincipalAdmin extends JFrame {
 
 		mntmOpcionConsulta = new JMenuItem(CONSULTA);
 		mntmOpcionConsulta.setHorizontalAlignment(SwingConstants.LEFT);
-		mntmOpcionConsulta.setFont(new Font("Arial", Font.PLAIN, 12));
+		mntmOpcionConsulta.setFont(new Font("Dialog", Font.PLAIN, 12));
 		mnMenu2.add(mntmOpcionConsulta);
 		getContentPane().setLayout(null);
 		getContentPane().setLayout(null);
@@ -107,5 +108,12 @@ public class VPrincipalAdmin extends JFrame {
 	public void cargarPanel(JPanel panel) {
 		// TODO Auto-generated method stub
 		scrpContenedor.setViewportView(panel);
+	}
+	public void setListener(Control control) {
+		// TODO Auto-generated method stub
+		mntmOpcionConsulta.addActionListener(control);
+		mntmOpcionModificacion.addActionListener(control);
+		mntmOpcionRegistro.addActionListener(control);
+		mnMenuSalir.addActionListener(control);
 	}
 }
