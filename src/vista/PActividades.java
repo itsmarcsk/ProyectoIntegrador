@@ -86,7 +86,7 @@ public class PActividades extends JPanel {
 		btnConsulta.setBounds(890, 914, 267, 77);
 		add(btnConsulta);
 		
-		
+		activar(false);
 	}
 	public void configurarTabla() {
 		model = new DefaultTableModel() {
@@ -139,8 +139,41 @@ public class PActividades extends JPanel {
 
 	}
 	public void setListener (Control c) {
-//		btnConsulta.addActionListener(c);
-		
+		btnConsulta.addActionListener(c);
+		btnUnirse.addActionListener(c);
+	}
+	
+	public void activar(boolean b) {
+		cmbhoraFin.setEnabled(b);
+		cmbhoraIni.setEnabled(b);
+	}
+	
+	public String getNombre() {
+		if (table.getSelectedRow() == -1) {
+			return "";
+		} else {
+			return model.getValueAt(table.getSelectedRow(), 0).toString();
+		}
+	}
+	
+	public void rellenarDesc(String desc) {
+		txtTablaDescripcion.setText(desc);
+	}
+	
+	public boolean comprobarHora() {
+		if (cmbhoraFin.getSelectedIndex() == 0 || cmbhoraIni.getSelectedIndex() == 0 || cmbhoraFin.getSelectedIndex() > cmbhoraIni.getSelectedIndex()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public Actividad rellenarActividad() {
+		if (comprobarHora()) {
+			return new Actividad(getNombre(),cmbhoraIni.getSelectedItem() + "", cmbhoraFin.getSelectedItem() + "");
+		} else {
+			return null;
+		}
 	}
 }
 

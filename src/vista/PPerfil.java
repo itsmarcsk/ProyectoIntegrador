@@ -1,24 +1,23 @@
 package vista;
 
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-import db.Persistance;
-import modelo.Cliente;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerDateModel;
-import java.util.Date;
-import java.util.Calendar;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.table.DefaultTableModel;
 
 import controlador.Control;
+import db.Persistance;
+import modelo.Actividad;
+import modelo.Cliente;
 
 public class PPerfil extends JPanel {
 	public static final String BORRAR_ACTIVIDAD = "Borrar Actividad";
@@ -36,17 +35,19 @@ public class PPerfil extends JPanel {
 	private JScrollPane scrpListaActividades;
 	private JButton btnGuardarCambios;
 	private JButton btnBorrarCuenta;
-	private Persistance Pers;
+	private Persistance pers;
 	private VLogin vLogin;
 	private JTextField txtApellidos;
 	private VPrincipalCliente VPC;
 	private JSpinner spnAnio;
 	private JSpinner spnMes;
 	private JSpinner spnDia;
+	private DefaultTableModel model;
+	public String[] column = new String[] { "NOMBRE", "PRECIO"};
 	
 	public PPerfil() {
 		vLogin = new VLogin();
-		Pers = new Persistance();
+		pers = new Persistance();
 		init();
 		
 	}
@@ -205,11 +206,13 @@ public class PPerfil extends JPanel {
 		panelDatosPersonales.add(lblDescripcin);
 		
 		rellenarDatosPersonales();
+		
+		rellenarTabla(pers.consultarActividadesCliente(vLogin.getUsuario()));
 	}
 
 
 	private void rellenarDatosPersonales() {
-		Cliente c = Pers.consultarDatos(vLogin.getUsuario());
+		Cliente c = pers.consultarDatos(vLogin.getUsuario());
 		
 		txtNombre.setText(c.getNombre());
 		txtNombre.setText(c.getApellido());
@@ -245,8 +248,8 @@ public class PPerfil extends JPanel {
 		if (dni.isBlank()) {
 			return null;
 		}
-		
 		return new Cliente(nombre, apellidos,dia, mes, anio, dni, email ,contra);
+		
 	}
 
 
@@ -255,5 +258,50 @@ public class PPerfil extends JPanel {
 		btnBorrarCuenta.addActionListener(control);
 		btnConsultar.addActionListener(control);
 		btnGuardarCambios.addActionListener(control);
+	}
+	
+	public void configurarTabla() {
+		model = new DefaultTableModel() {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				/*
+				 * 
+				 * if (column == 2) { return true; } else {
+				 */
+				return false;
+			}
+
+		};
+		model.addColumn(column[0]);
+		model.addColumn(column[1]);
+		tblListaActividades.setModel(model);
+
+	}
+
+	public void rellenarTabla(ArrayList<Actividad> lA) {
+		// vaciamos la tabla
+		model.setRowCount(0);
+
+		Object[] fila = new Object[2];
+
+		for (Actividad a : lA) {
+			fila[0] = a.getNombre();
+			fila[1] = a.getPrecio();
+
+			model.addRow(fila);
+		}
+	}
+	
+	public void rellenarDescripcion(String desc) {
+		txtDescripcion.setText(desc);
+	}
+	
+	public String getNombre() {
+		if (tblListaActividades.getSelectedRow() == -1) {
+			return "";
+		} else {
+			return model.getValueAt(tblListaActividades.getSelectedRow(), 0).toString();
+		}
 	}
 }

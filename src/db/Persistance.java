@@ -178,8 +178,6 @@ public class Persistance {
 			while (rslt.next()) {
 				listaClientes.add(new Cliente(rslt.getString(COL_NOMBRE_CLI), rslt.getString(COL_APELLIDO_CLI), rslt.getInt(COL_DIA_NAC_CLI), rslt.getInt(COL_MES_NAC_CLI), rslt.getInt(COL_ANO_NAC_CLI), rslt.getString(COL_DNI_CLI), rslt.getInt(COL_PREFIJO_NUM_CLI), rslt.getInt(COL_NUM_TEL_CLI), rslt.getString(COL_GENERO_CLI), rslt.getString(COL_EMAIL_CLI)));
 			}
-		
-			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -204,19 +202,20 @@ public class Persistance {
 		}
 		return listaClientes;
 	}
-	public Actividad consultarActividadesCliente(String dni) {
+	public ArrayList<Actividad> consultarActividadesCliente(String dni) {
 		String query = "SELECT " + COL_NOM_ACTI + ", " + COL_PRECIO_ACTI + ", " + COL_DES_ACT + " FROM " + TABLA_ACTIVIDADES + " WHERE " + COL_NOM_ACTI + " = SELECT " + COL_NOMBRE_CLI_ACT + " FROM " + TABLA_CLIENTES_ACTIVIDADES + " WHERE " + COL_DNI_CLI + " = ?";
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rslt = null;
-		Actividad a = null;
+		ArrayList<Actividad> listaActividad = new ArrayList<>();
 		try {
 			con = aDB.getConnection();
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, dni);
 			rslt = stmt.executeQuery();
-			a = new Actividad(rslt.getString(COL_NOM_ACTI),rslt.getInt(COL_PRECIO_ACTI), rslt.getString(COL_DES_ACT));
-			
+			while (rslt.next()) {
+				listaActividad.add(new Actividad(rslt.getString(COL_NOM_ACTI), rslt.getInt(COL_PRECIO_ACTI), rslt.getString(COL_DES_ACT)));
+			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -239,21 +238,24 @@ public class Persistance {
 				e.printStackTrace();
 			}
 		}
-		return a;
+		return listaActividad;
 	
 	}
 	//consultar actividades para PActividad
-	public Actividad consultarActividades(){
+	public ArrayList<Actividad> consultarActividades(){
 		String query = "SELECT " + COL_NOM_ACTI + ", " + COL_PRECIO_ACTI + " FROM " + TABLA_ACTIVIDADES;
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rslt = null;
-		Actividad c = null;
+		ArrayList<Actividad> listaActividad = new ArrayList<>();
+
 		try {
 			con = aDB.getConnection();
 			stmt = con.prepareStatement(query);
 			rslt = stmt.executeQuery();
-			c = new Actividad(rslt.getString(COL_NOM_ACTI),rslt.getInt(COL_PRECIO_ACTI));
+			while (rslt.next()) {
+				listaActividad.add(new Actividad(rslt.getString(COL_NOM_ACTI), rslt.getInt(COL_PRECIO_ACTI)));
+			}
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -277,7 +279,7 @@ public class Persistance {
 				e.printStackTrace();
 			}
 		}
-		return c;
+		return listaActividad;
 	}
 	public Actividad consultarActividadesTodos(String nombre){
 		String query = "SELECT " + COL_NOM_ACTI + ", " + COL_PRECIO_ACTI + ", " + COL_DES_ACT + " FROM " + TABLA_ACTIVIDADES + " WHERE " + COL_NOM_ACTI + " = ?";
@@ -316,6 +318,44 @@ public class Persistance {
 		}
 		return c;
 	}
+	
+	public String consultaDescripcion(String nombre) {
+        String query = "SELECT " + COL_DES_ACT + " FROM " + TABLA_ACTIVIDADES + " WHERE " + COL_NOM_ACTI + " = ?";
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rslt = null;
+        String c = null;
+        try {
+            con = aDB.getConnection();
+            stmt = con.prepareStatement(query);
+            stmt.setString(1, nombre);
+            rslt = stmt.executeQuery();
+            c = rslt.getString(COL_DES_ACT);
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rslt != null) {
+                    rslt.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                // TODO: handle exception
+                e.printStackTrace();
+            }
+        }
+        return c;
+    }
+	
 	public int modificarActividad(Actividad c) {
 		String query = "UPDATE " + TABLA_ACTIVIDADES + " SET " + COL_PRECIO_ACTI
 				+ " = ?, " + COL_DES_ACT + " = ? " +   " WHERE " + COL_NOM_ACTI + " = ?";
@@ -351,7 +391,7 @@ public class Persistance {
 		return res;
 	}
 	//actualizar datos de cliente
-	public int actualizarDatosTablaCliente(String dni, Cliente c) {
+	public int actualizarDatosCliente(String dni, Cliente c) {
 		String query = "UPDATE " + TABLA_CLI + " SET " + COL_NOMBRE_CLI + " = ?, " + COL_APELLIDO_CLI
 				+ " = ?, " + COL_DIA_NAC_CLI + " = ?, " + COL_MES_NAC_CLI + " = ?, " + COL_ANO_NAC_CLI + " = ?, " + COL_EMAIL_CLI
 				+ " = ?" + COL_CONTRASENA_CLI + " = ?, " +   " WHERE " + COL_DNI_CLI + " = ?";
@@ -426,6 +466,81 @@ public class Persistance {
 		}
 		return res;
 	}
+	
+	public int borrarActividad(String nombre) {
+        String query = "DELETE FROM " + TABLA_ACTIVIDADES + " WHERE " + COL_NOM_ACTI + " = ?";
+        int res = 0;
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+            con = aDB.getConnection();
+            stmt = con.prepareStatement(query);
+            stmt.setString(1, nombre);
+            res = stmt.executeUpdate();
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            res = -1;
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            res = -1;
+        } finally {
+            try {
+
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                // TODO: handle exception
+                e.printStackTrace();
+            }
+        }
+        return res;
+        
+    }
+	
+	public int borrarActividadCliente(String nombre, String dni) {
+        String query = "DELETE FROM " + TABLA_CLIENTES_ACTIVIDADES + " WHERE " + COL_NOMBRE_CLI_ACT + " = ? AND " + COL_DNI_CLI_ACT + " = ?";
+        int res = 0;
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+            con = aDB.getConnection();
+            stmt = con.prepareStatement(query);
+            stmt.setString(1, nombre);
+            stmt.setString(2, dni);
+            res = stmt.executeUpdate();
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            res = -1;
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            res = -1;
+        } finally {
+            try {
+
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                // TODO: handle exception
+                e.printStackTrace();
+            }
+        }
+        return res;
+    }
+	
 	//registrar datos de cliente
 	public int registrarCliente(Cliente c) {
 		String query = "INSERT INTO " + TABLA_CLI + "( " + COL_DNI_CLI + ", " + COL_NOMBRE_CLI + ", " + COL_APELLIDO_CLI
@@ -477,4 +592,24 @@ public class Persistance {
 		return res;
 	}
 	
+	public int registrarActividadCliente(String dni, Actividad c) {
+        String query = "INSERT INTO " + TABLA_CLIENTES_ACTIVIDADES + " ( " + COL_DNI_CLI_ACT + ", " + COL_NOMBRE_CLI_ACT + ", " +  COL_HORARIO_INI + ", " + COL_HORARIO_FIN + " ) VALUES (?,?,?,?)";
+        Connection con = null;
+        PreparedStatement stmt = null;
+        int res = 0;
+        try {
+            con = aDB.getConnection();
+            stmt = con.prepareStatement(query);
+            stmt.setString(1, dni);
+            stmt.setString(2, c.getNombre());
+            stmt.setString(3, c.getHoraIni());
+            stmt.setString(4, c.getHoraFin());
+            res = stmt.executeUpdate();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            res = -1;
+        }
+        return res;
+    }
 }

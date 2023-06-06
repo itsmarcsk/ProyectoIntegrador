@@ -82,19 +82,57 @@ public class Control implements ActionListener{
 			//TODO PANEL PERFIL
 			if (e.getActionCommand().equals(PPerfil.CONSULTAR_ACTIVIDAD)) {
 				
+				if (PP.getNombre() != null) {
+					PP.rellenarDescripcion(pers.consultaDescripcion(PP.getNombre()));
+				} else {
+					vPC.mostrarError("No has seleccionado ninguna actividad");
+				}
+				
 			} else if (e.getActionCommand().equals(PPerfil.BORRAR_ACTIVIDAD)) {
+				
+				if (PP.getNombre() != null) {
+					pers.borrarActividadCliente(PP.getNombre(), vLogin.getUsuario());
+				} else {
+					vPC.mostrarError("No has seleccionado ninguna actividad");
+				}
 				
 			} else if (e.getActionCommand().equals(PPerfil.BORRAR_CUENTA)) {
 				
+				if (vPC.mostrarPregunta("¿De verdad quieres borrar tu cuenta?")) {
+					pers.borrarCuenta(vLogin.getUsuario());
+				}
+				
 			} else if (e.getActionCommand().equals(PPerfil.GUARDAR_CAMBIOS)) {
+				
+				pers.actualizarDatosCliente(vLogin.getUsuario(), PP.guardarDatosPersonales());
 				
 			//TODO PANEL ACTIVIDADES
 			} else if (e.getActionCommand().equals(PActividades.UNIRSE)) {
 				
+				PA.activar(false);
+				if (PA.rellenarActividad() != null) {
+					pers.registrarActividadCliente(vLogin.getUsuario(), PA.rellenarActividad());
+				} else {
+					vPC.mostrarError("Has introducido una hora de fin anterior a la hora de inicio");
+				}
+				
 			} else if (e.getActionCommand().equals(PActividades.CONSULTA)) {
+				
+				if (PA.getNombre() != null) {
+					PA.rellenarDesc(pers.consultaDescripcion(PA.getNombre()));
+					PA.activar(true);
+				} else {
+					vPA.mostrarError("No se ha seleccionado una actividad");
+				}
 				
 			//TODO PANEL AÑADIR MODIFICAR ACTIVIDAD
 			} else if (e.getActionCommand().equals(PAniadirModificar.ANIADIR_ACTIVIDAD)) {
+				
+				if (pAM.getDatos() != null) {
+					pers.registrarActividad(pAM.getDatos());
+				} else {
+					vPA.mostrarError("No se han rellenado todos los datos");
+				}
 				
 			} else if (e.getActionCommand().equals(PAniadirModificar.MODIFICAR_ACTIVIDAD)) {
 				Actividad c = pAM.getDatos();
@@ -121,9 +159,20 @@ public class Control implements ActionListener{
 				Cliente c = vRegistro.getDatos();
 				pers.registrarCliente(c);
 				
+				vRegistro.dispose();
+				vLogin.hacerVisible();
+				
 			} else if (e.getActionCommand().equals(VLogin.INICIO_SESION)) {
 				
-				
+				if (pers.confirmarInicioCliente(vLogin.getUsuario(), vLogin.getPassword())) {
+					vLogin.dispose();
+					vPC.hacerVisible();
+				} else if (pers.confirmarInicioAdmin(vLogin.getUsuario(), vLogin.getPassword())) {
+					vLogin.dispose();
+					vPA.hacerVisible();
+				} else {
+					vPA.mostrarError("No existe la cuenta introducida");
+				}
 				
 			} else if (e.getActionCommand().equals(VLogin.REGISTRARSE)) {
 				
@@ -141,6 +190,12 @@ public class Control implements ActionListener{
 				pAM.modificar();
 				vPA.cargarPanel(pAM);
 			} else if (e.getActionCommand().equals(PActividadAdmin.ELIMINAR)) {
+				
+				if (!(pAA.getNombre().isBlank())) {
+					pers.borrarActividad(pAA.getNombre());
+				} else {
+					vPA.mostrarError("No se ha seleccionado ninguna actividad");
+				}
 				
 			}
 		}

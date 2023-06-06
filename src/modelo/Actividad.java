@@ -63,5 +63,11 @@ public class Actividad {
 		this.nombre = nombre;
 		this.precio = precio;
 	}
+	public Actividad(String nombre, String horaIni, String horaFin) {
+		this.nombre = nombre;
+		this.horaIni = horaIni;
+		this.horaFin = horaFin;
+	}
+	
 
 }
