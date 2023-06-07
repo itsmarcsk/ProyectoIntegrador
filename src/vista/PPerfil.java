@@ -29,7 +29,6 @@ public class PPerfil extends JPanel {
 	private JTextField txtEmail;
 	private JTextField txtDni;
 	private JTable tblListaActividades;
-	private JTextArea txtDescripcion;
 	private JButton btnBorrarActividad;
 	private JButton btnConsultar;
 	private JScrollPane scrpListaActividades;
@@ -44,6 +43,7 @@ public class PPerfil extends JPanel {
 	private JSpinner spnDia;
 	private DefaultTableModel model  = new DefaultTableModel();
 	public String[] column = new String[] { "NOMBRE", "PRECIO"};
+	private JTextArea txtDescripcion;
 	
 	public PPerfil() {
 		vLogin = new VLogin();
@@ -179,16 +179,7 @@ public class PPerfil extends JPanel {
 		
 		tblListaActividades = new JTable();
 		scrpListaActividades.setViewportView(tblListaActividades);
-		
-		JScrollPane scrpDescripcion = new JScrollPane();
-		scrpDescripcion.setBounds(655, 312, 525, 684);
-		panelDatosPersonales.add(scrpDescripcion);
-		
-		txtDescripcion = new JTextArea();
-		txtDescripcion.setFont(new Font("Dialog", Font.PLAIN, 20));
-		txtDescripcion.setEditable(false);
-		txtDescripcion.setWrapStyleWord(true);
-		scrpDescripcion.setViewportView(txtDescripcion);
+		configurarTabla();
 		
 		btnBorrarActividad = new JButton(BORRAR_ACTIVIDAD);
 		btnBorrarActividad.setFont(new Font("Dialog", Font.PLAIN, 20));
@@ -205,8 +196,12 @@ public class PPerfil extends JPanel {
 		lblDescripcin.setBounds(655, 222, 245, 66);
 		panelDatosPersonales.add(lblDescripcin);
 		
-		
-		
+		txtDescripcion = new JTextArea();
+		txtDescripcion.setWrapStyleWord(true);
+		txtDescripcion.setFont(new Font("Dialog", Font.PLAIN, 20));
+		txtDescripcion.setEditable(false);
+		txtDescripcion.setBounds(655, 313, 523, 682);
+		panelDatosPersonales.add(txtDescripcion);
 		
 	}
 
@@ -304,5 +299,9 @@ public class PPerfil extends JPanel {
 		} else {
 			return model.getValueAt(tblListaActividades.getSelectedRow(), 0).toString();
 		}
+	}
+	
+	public void reiniciarTxtA() {
+		txtDescripcion.setText("");
 	}
 }

@@ -203,7 +203,8 @@ public class Persistance {
 		return listaClientes;
 	}
 	public ArrayList<Actividad> consultarActividadesCliente(String dni) {
-		String query = "SELECT " + COL_NOM_ACTI + ", " + COL_PRECIO_ACTI + ", " + COL_DES_ACT + " FROM " + TABLA_ACTIVIDADES + " WHERE " + COL_NOM_ACTI + " = (SELECT " + COL_NOMBRE_CLI_ACT + " FROM " + TABLA_CLIENTES_ACTIVIDADES + " WHERE " + COL_DNI_CLI + " = ?)";
+		String query = "SELECT " + COL_NOM_ACTI + ", " + COL_PRECIO_ACTI + ", " + COL_DES_ACT + " FROM " + TABLA_ACTIVIDADES + " WHERE " +  COL_NOM_ACTI  + " IN ( SELECT " + COL_NOMBRE_CLI_ACT + " FROM " + TABLA_CLIENTES_ACTIVIDADES + " WHERE " + COL_DNI_CLI_ACT + " = ?)";
+				
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rslt = null;

@@ -101,6 +101,7 @@ public class Control implements ActionListener{
 				
 				if (PP.getNombre() != null) {
 					pers.borrarActividadCliente(PP.getNombre(), vLogin.getUsuario());
+					PP.rellenarTabla(pers.consultarActividadesCliente(vLogin.getUsuario()));
 				} else {
 					vPC.mostrarError("No has seleccionado ninguna actividad");
 				}
