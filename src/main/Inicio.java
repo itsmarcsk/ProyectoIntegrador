@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import vista.PActividadAdmin;
 import vista.PActividades;
 import vista.PAniadirModificar;
-import vista.PClientes;
 import vista.PConsultarClientes;
 import vista.PInstalaciones;
 import vista.PPerfil;
@@ -30,12 +29,11 @@ public class Inicio {
 				PActividades PA = new PActividades();
 				PConsultarClientes pCC = new PConsultarClientes();
 				PPerfil pP = new PPerfil();
-				PClientes pC = new PClientes();
 				PActividadAdmin pAA = new PActividadAdmin();
 				PAniadirModificar pAM = new PAniadirModificar();
 				PInstalaciones pI = new PInstalaciones();
 				
-				Control control = new Control(vLogin, vRegistro, vPA, vPC, PA, pP, pCC , pC, pAA, pAM, pI);
+				Control control = new Control(vLogin, vRegistro, vPA, vPC, PA, pP, pCC , pAA, pAM, pI);
 				
 				
 				
@@ -45,7 +43,6 @@ public class Inicio {
                 vPC.setListener(control);
                 PA.setListener(control);
                 pP.setListener(control);
-                pC.setListener(control);
                 pAA.setListener(control);
                 pAM.setListener(control);
 				

@@ -34,7 +34,7 @@ public class VPrincipalAdmin extends JFrame {
 	public static final String ANIADIR_ACT = "Añadir actividad";
 	public static final String CONSULTAR = "Consultar actividad";
 
-	private static final String CONSULTA = "Consulta";
+	public static final String CONSULTA = "Consulta";
 	public VPrincipalAdmin() {
 		super("FITDEVELOPER");
 		this.setExtendedState(this.MAXIMIZED_BOTH);

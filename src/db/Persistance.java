@@ -164,8 +164,8 @@ public class Persistance {
 		}
 		return c;
 	}
-	public ArrayList<Cliente> consultarClientes(String nombre) {
-		String query = "SELECT * FROM " + TABLA_CLI + " WHERE " + COL_NOMBRE_CLI + " LIKE ?";
+	public ArrayList<Cliente> consultarClientes() {
+		String query = "SELECT * FROM " + TABLA_CLI;
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rslt = null;
@@ -173,7 +173,6 @@ public class Persistance {
 		try {
 			con = aDB.getConnection();
 			stmt = con.prepareStatement(query);
-			stmt.setString(1, nombre);
 			rslt = stmt.executeQuery();
 			while (rslt.next()) {
 				listaClientes.add(new Cliente(rslt.getString(COL_NOMBRE_CLI), rslt.getString(COL_APELLIDO_CLI), rslt.getInt(COL_DIA_NAC_CLI), rslt.getInt(COL_MES_NAC_CLI), rslt.getInt(COL_ANO_NAC_CLI), rslt.getString(COL_DNI_CLI), rslt.getInt(COL_PREFIJO_NUM_CLI), rslt.getInt(COL_NUM_TEL_CLI), rslt.getString(COL_GENERO_CLI), rslt.getString(COL_EMAIL_CLI)));

@@ -6,6 +6,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.Control;
+import modelo.Cliente;
 import modelo.Consulta;
 
 import javax.swing.JLabel;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 
 public class PConsultarClientes extends JPanel {
 
-	public String[] column = new String[] { "DNI", "NOMBRE", "ACTIVIDADES" };
+	public String[] column = new String[] { "DNI", "NOMBRE"};
 	private DefaultTableModel model = new DefaultTableModel();
 	private JScrollPane scrollPane;
 	private JTable table;
@@ -60,22 +61,22 @@ public class PConsultarClientes extends JPanel {
 		};
 		model.addColumn(column[0]);
 		model.addColumn(column[1]);
-		model.addColumn(column[2]);
+		
 
 		table.setModel(model);
 
 	}
 
-	public void rellenarTabla(ArrayList<Consulta> lA) {
+	public void rellenarTabla(ArrayList<Cliente> lA) {
 		// vaciamos la tabla
 		model.setRowCount(0);
 
 		Object[] fila = new Object[2];
 
-		for (Consulta a : lA) {
+		for (Cliente a : lA) {
 			fila[0] = a.getDni();
 			fila[1] = a.getNombre();
-			fila[2] = a.getActividades();
+			
 
 			model.addRow(fila);
 		}

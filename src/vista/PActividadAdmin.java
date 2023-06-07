@@ -79,7 +79,7 @@ public class PActividadAdmin extends JPanel {
 		// vaciamos la tabla
 		model.setRowCount(0);
 
-		Object[] fila = new Object[2];
+		Object[] fila = new Object[3];
 
 		for (Actividad a : lA) {
 			fila[0] = a.getNombre();
