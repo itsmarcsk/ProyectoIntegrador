@@ -184,24 +184,25 @@ public class VRegistro extends JFrame {
 
 		cmbPrefijo = new JComboBox();
 		cmbPrefijo.setFont(new Font("Dialog", Font.PLAIN, 20));
-		cmbPrefijo.setModel(new DefaultComboBoxModel(new String[] {"", "34", "355", "49", "376", "43", "32", "375", "387",
-				"359", "385", "357", "45", "421", "386", "372", "358", "33", "30", "36", "354", "353", "39", "371",
-				"423", "370", "352", "389", "356", "373", "377", "31", "47", "48", "351", "40", "44", "7", "378", "378",
-				"421", "46", "41", "90", "380", "379" }));
+		cmbPrefijo.setModel(new DefaultComboBoxModel(new String[] { "", "34", "355", "49", "376", "43", "32", "375",
+				"387", "359", "385", "357", "45", "421", "386", "372", "358", "33", "30", "36", "354", "353", "39",
+				"371", "423", "370", "352", "389", "356", "373", "377", "31", "47", "48", "351", "40", "44", "7", "378",
+				"378", "421", "46", "41", "90", "380", "379" }));
 		cmbPrefijo.setBounds(372, 264, 72, 59);
 		getContentPane().add(cmbPrefijo);
-		
+
 		txtContrasenia = new JPasswordField();
 		txtContrasenia.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtContrasenia.setBounds(220, 498, 435, 55);
 		getContentPane().add(txtContrasenia);
-		
+
 		txtContrasenia2 = new JPasswordField();
 		txtContrasenia2.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtContrasenia2.setBounds(220, 576, 435, 55);
 		getContentPane().add(txtContrasenia2);
 		centrarVentana();
 	}
+
 	private void centrarVentana() {
 		// TODO Auto-generated method stub
 		// Se obtienen las dimensiones en pixels de la pantalla.
@@ -213,43 +214,50 @@ public class VRegistro extends JFrame {
 	}
 
 	private String[] obtenerAnios() {
-	    String[] aniosA = new String[74];
-	    for (int i = 1950; i < 2024; i++) {
-	        aniosA[i - 1950] = "" + i;
-	    }
-	    
-	    for (int i = 0; i < aniosA.length / 2; i++) {
-	        String temp = aniosA[i];
-	        aniosA[i] = aniosA[aniosA.length - i - 1];
-	        aniosA[aniosA.length - i - 1] = temp;
-	    }
-	    return aniosA;
+		String[] aniosA = new String[74];
+		for (int i = 1950; i < 2024; i++) {
+			aniosA[i - 1950] = "" + i;
+		}
+
+		for (int i = 0; i < aniosA.length / 2; i++) {
+			String temp = aniosA[i];
+			aniosA[i] = aniosA[aniosA.length - i - 1];
+			aniosA[aniosA.length - i - 1] = temp;
+		}
+		return aniosA;
 	}
 
 	public Cliente getDatos() {
-		
+
 		String nombre = txtNombre.getText();
 		if (nombre.isBlank()) {
 			return null;
 		}
-		
+
 		String apellido = txtApellido.getText();
 		if (apellido.isBlank()) {
 			return null;
 		}
-		
+
 		int diaNac = Integer.parseInt((String) cmbDia.getSelectedItem());
 		int mesNac = Integer.parseInt((String) cmbMes.getSelectedItem());
 		int anioNac = Integer.parseInt((String) cmbAnio.getSelectedItem());
-		
+
 		String dni = txtDni.getText();
 		if (dni.isBlank()) {
 			return null;
 		}
-		
-		int prefijo = Integer.parseInt((String) cmbPrefijo.getSelectedItem());
+		int prefijo = 0;
+		try {
+			prefijo = Integer.parseInt((String) cmbPrefijo.getSelectedItem());
+			
+		} catch (Exception e) {
+			mostrarError("Debes de seleccionar un prefijo de telefono");
+		}
 		String telefonoS = txtTelef.getText();
+		
 		if (telefonoS.length() != 9) {
+			mostrarError("Debes de introducir 9 digitos en el telefono");
 			return null;
 		}
 		int telefono = 0;
@@ -258,28 +266,31 @@ public class VRegistro extends JFrame {
 			if (telefono == 0) {
 				return null;
 			}
-			
+
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
-		
-		
-		String genero =generoElegido();
-		
-		
-		
+
+		String genero = generoElegido();
+
 		String email = txtEmail.getText();
-		
+
 		if (email.isBlank()) {
 			return null;
 		}
-		
+
 		if (txtContrasenia.getText().equals(txtContrasenia2.getText())) {
 			String contrasenia = txtContrasenia.getText();
-			Cliente cliente = new Cliente(nombre, apellido, diaNac, mesNac, anioNac, dni, prefijo, telefono, genero, email, contrasenia);
+			
+			if (contrasenia.isBlank()) {
+				return null;
+			}
+			
+			Cliente cliente = new Cliente(nombre, apellido, diaNac, mesNac, anioNac, dni, prefijo, telefono, genero,
+					email, contrasenia);
 			return cliente;
 		} else {
-			
+
 			return null;
 		}
 	}
@@ -288,14 +299,14 @@ public class VRegistro extends JFrame {
 		// TODO Auto-generated method stub
 		if (rdbtnPrefieroNoDecirlo.isSelected()) {
 			return null;
-		}else if(rdbtnMasc.isSelected()) {
+		} else if (rdbtnMasc.isSelected()) {
 			return "Masculino";
-		}else if(rdbtnFemenino.isSelected()){
+		} else if (rdbtnFemenino.isSelected()) {
 			return "Femenino";
-		}else {
+		} else {
 			return null;
 		}
-		
+
 	}
 
 	public void hacerVisible() {
@@ -306,7 +317,7 @@ public class VRegistro extends JFrame {
 		btnCancelar.addActionListener(control);
 		btnCrearCuenta.addActionListener(control);
 	}
-	
+
 	public void mostrarMensaje(String mensaje) {
 		JOptionPane.showMessageDialog(this, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
 	}
@@ -318,9 +329,10 @@ public class VRegistro extends JFrame {
 	public void mostrarAlerta(String alerta) {
 		JOptionPane.showMessageDialog(this, alerta, "Error", JOptionPane.WARNING_MESSAGE);
 	}
-	
+
 	public boolean mostrarPregunta(String mensaje) {
-		if (JOptionPane.showConfirmDialog(this, mensaje, "Confirmación", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_NO_OPTION) {
+		if (JOptionPane.showConfirmDialog(this, mensaje, "Confirmación",
+				JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_NO_OPTION) {
 			return true;
 		} else {
 			return false;
