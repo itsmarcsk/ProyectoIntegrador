@@ -37,7 +37,6 @@ public class VPrincipalAdmin extends JFrame {
 	private static final String CONSULTA = "Consulta";
 	public VPrincipalAdmin() {
 		super("FITDEVELOPER");
-		init();
 		this.setExtendedState(this.MAXIMIZED_BOTH);
 		setSize(1920, 1080);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

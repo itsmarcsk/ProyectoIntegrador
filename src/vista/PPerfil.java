@@ -42,7 +42,7 @@ public class PPerfil extends JPanel {
 	private JSpinner spnAnio;
 	private JSpinner spnMes;
 	private JSpinner spnDia;
-	private DefaultTableModel model;
+	private DefaultTableModel model  = new DefaultTableModel();
 	public String[] column = new String[] { "NOMBRE", "PRECIO"};
 	
 	public PPerfil() {
@@ -216,7 +216,7 @@ public class PPerfil extends JPanel {
 		Cliente c = cliente;
 		
 		txtNombre.setText(c.getNombre());
-		txtNombre.setText(c.getApellido());
+		txtApellidos.setText(c.getApellido());
 		txtEmail.setText(c.getEmail());
 		spnDia.setValue(c.getDiaNac());
 		spnMes.setValue(c.getMesNac());

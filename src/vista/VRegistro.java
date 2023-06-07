@@ -280,15 +280,16 @@ public class VRegistro extends JFrame {
 
 	private String generoElegido() {
 		// TODO Auto-generated method stub
-		if (btngrpGenero.getSelection() == null) {
+		if (rdbtnPrefieroNoDecirlo.isSelected()) {
 			return null;
-		} else if (btngrpGenero.getSelection().equals("Prefiero no decirlo")) {
-			return null;
-		}else if(btngrpGenero.getSelection().equals("Masculino")) {
+		}else if(rdbtnMasc.isSelected()) {
 			return "Masculino";
-		}else {
+		}else if(rdbtnFemenino.isSelected()){
 			return "Femenino";
+		}else {
+			return null;
 		}
+		
 	}
 
 	public void hacerVisible() {

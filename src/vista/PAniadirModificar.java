@@ -22,6 +22,10 @@ public class PAniadirModificar extends JPanel {
 	private JTextArea txtaDescripcion;
 	private JButton btnModificarAniadir;
 	private JSpinner spnPrecio;
+	private JLabel lblNombre;
+	private JLabel lblPrecio;
+	private JLabel lblDescripcin;
+	private JScrollPane scrpDescripcion;
 	public PAniadirModificar() {
 		init();
 	}
@@ -31,17 +35,17 @@ public class PAniadirModificar extends JPanel {
 		setSize(1920,1080);
 		setLayout(null);
 		
-		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre = new JLabel("Nombre:");
 		lblNombre.setFont(new Font("Dialog", Font.PLAIN, 24));
 		lblNombre.setBounds(60, 78, 167, 90);
 		add(lblNombre);
 		
-		JLabel lblPrecio = new JLabel("Precio:");
+		lblPrecio = new JLabel("Precio:");
 		lblPrecio.setFont(new Font("Dialog", Font.PLAIN, 24));
 		lblPrecio.setBounds(914, 78, 160, 90);
 		add(lblPrecio);
 		
-		JLabel lblDescripcin = new JLabel("Descripción:");
+		lblDescripcin = new JLabel("Descripción:");
 		lblDescripcin.setFont(new Font("Dialog", Font.PLAIN, 24));
 		lblDescripcin.setBounds(60, 242, 167, 90);
 		add(lblDescripcin);
@@ -58,26 +62,26 @@ public class PAniadirModificar extends JPanel {
 		spnPrecio.setBounds(1098, 78, 227, 90);
 		add(spnPrecio);
 		
-		JScrollPane scrpDescripcion = new JScrollPane();
-		scrpDescripcion.setBounds(60, 343, 1788, 611);
+		scrpDescripcion = new JScrollPane();
+		scrpDescripcion.setBounds(60, 343, 1788, 380);
 		add(scrpDescripcion);
 		
 		txtaDescripcion = new JTextArea();
 		scrpDescripcion.setViewportView(txtaDescripcion);
 		
-		btnModificarAniadir = new JButton(aniadirModificarBoton);
+		btnModificarAniadir = new JButton();
 		btnModificarAniadir.setFont(new Font("Dialog", Font.BOLD, 20));
-		btnModificarAniadir.setBounds(1525, 981, 323, 67);
+		btnModificarAniadir.setBounds(1525, 797, 323, 67);
 		add(btnModificarAniadir);
 	}
 	
 	public void modificar() {
-		aniadirModificarBoton = MODIFICAR_ACTIVIDAD;
+		btnModificarAniadir.setText(MODIFICAR_ACTIVIDAD);
 		txtNombre.setEnabled(false);
 	}
 	
 	public void aniadir() {
-		aniadirModificarBoton = ANIADIR_ACTIVIDAD;
+		btnModificarAniadir.setText(ANIADIR_ACTIVIDAD);
 		txtNombre.setEnabled(true);
 	}
 
@@ -105,5 +109,12 @@ public class PAniadirModificar extends JPanel {
 	public void setListener(Control control) {
 		// TODO Auto-generated method stub
 		btnModificarAniadir.addActionListener(control);
+	}
+
+	public void reiniciar() {
+		// TODO Auto-generated method stub
+		txtNombre.setText("");
+		txtaDescripcion.setText("");
+		spnPrecio.setValue(10);
 	}
 }

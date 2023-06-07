@@ -35,10 +35,7 @@ public class PActividadAdmin extends JPanel {
 		setSize(1920, 1080);
 
 		btnModificar = new JButton(MODIFICAR);
-		btnModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
 		btnModificar.setFont(new Font("Dialog", Font.BOLD, 24));
 		btnModificar.setBounds(477, 926, 244, 81);
 		add(btnModificar);

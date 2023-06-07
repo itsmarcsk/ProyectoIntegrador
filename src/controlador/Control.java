@@ -75,10 +75,12 @@ public class Control implements ActionListener{
 					System.exit(0);
 				}
 			} else if (e.getActionCommand().equals(VPrincipalAdmin.CONSULTAR)) {
+				pAA.rellenarTabla(pers.consultarActividadesTodosDatos());
 				vPA.cargarPanel(pAA);
 			} else if (e.getActionCommand().equals(VPrincipalAdmin.ANIADIR_ACT)) {
 				pAM.aniadir();
 				vPA.cargarPanel(pAM);
+				
 			} else if (e.getActionCommand().equals(VPrincipalAdmin.SALIR)) {
 				if (vPC.mostrarPregunta("Se va a cerrar la aplicación, ¿desea continuar?")) {
 					System.exit(0);
@@ -107,6 +109,9 @@ public class Control implements ActionListener{
 				
 				if (vPC.mostrarPregunta("¿De verdad quieres borrar tu cuenta?")) {
 					pers.borrarCuenta(vLogin.getUsuario());
+					pers.borrarActividadesC(vLogin.getUsuario());
+					vPC.dispose();
+					vLogin.hacerVisible();
 				}
 				
 			} else if (e.getActionCommand().equals(PPerfil.GUARDAR_CAMBIOS)) {
@@ -119,6 +124,8 @@ public class Control implements ActionListener{
 				PA.activar(false);
 				if (PA.rellenarActividad() != null) {
 					pers.registrarActividadCliente(vLogin.getUsuario(), PA.rellenarActividad());
+					vPC.mostrarMensaje("Se ha unido a la actividad");
+					PA.limpiarDatos();
 				} else {
 					vPC.mostrarError("Has introducido una hora de fin anterior a la hora de inicio");
 				}
@@ -137,6 +144,8 @@ public class Control implements ActionListener{
 				
 				if (pAM.getDatos() != null) {
 					pers.registrarActividad(pAM.getDatos());
+					vPA.mostrarMensaje("Se ha añadido la nueva actividad");
+					pAM.reiniciar();
 				} else {
 					vPA.mostrarError("No se han rellenado todos los datos");
 				}
@@ -169,11 +178,12 @@ public class Control implements ActionListener{
 				}else {
 					pers.registrarCliente(c);
 					vRegistro.reinicar();
+					vRegistro.dispose();
+					vLogin.hacerVisible();
+					
 				}
 			
 				
-				vRegistro.dispose();
-				vLogin.hacerVisible();
 				
 			} else if (e.getActionCommand().equals(VLogin.INICIO_SESION)) {
 				
@@ -209,6 +219,7 @@ public class Control implements ActionListener{
 				
 				if (!(pAA.getNombre().isBlank())) {
 					pers.borrarActividad(pAA.getNombre());
+					pers.borrarActividadC(pAA.getNombre());
 				} else {
 					vPA.mostrarError("No se ha seleccionado ninguna actividad");
 				}

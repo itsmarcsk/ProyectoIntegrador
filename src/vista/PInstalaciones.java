@@ -22,8 +22,7 @@ public class PInstalaciones extends JPanel{
         
 		JLabel lblNewLabel = new JLabel();
         lblNewLabel.setBounds(10, 10, 414, 242);
-        lblNewLabel.setIcon(new ImageIcon("img/mapaActu.jpg"));
+        lblNewLabel.setIcon(new ImageIcon("E:\\FP GS\\UE\\1er curso\\ProyectoIntegrador\\PortableGit\\workspaceProyecto\\ProyectoIntegrador\\img\\mapaActu.PNG"));
         frame.getContentPane().add(lblNewLabel);
 	}
-
 }

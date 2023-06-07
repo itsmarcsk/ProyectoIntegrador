@@ -280,6 +280,44 @@ public class Persistance {
 			}
 		}
 		return listaActividad;
+	}public ArrayList<Actividad> consultarActividadesTodosDatos(){
+		String query = "SELECT " + COL_NOM_ACTI + ", " + COL_PRECIO_ACTI + ", " + COL_DES_ACT + " FROM " + TABLA_ACTIVIDADES;
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rslt = null;
+		ArrayList<Actividad> listaActividad = new ArrayList<>();
+
+		try {
+			con = aDB.getConnection();
+			stmt = con.prepareStatement(query);
+			rslt = stmt.executeQuery();
+			while (rslt.next()) {
+				listaActividad.add(new Actividad(rslt.getString(COL_NOM_ACTI), rslt.getInt(COL_PRECIO_ACTI), rslt.getString(COL_DES_ACT)));
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rslt != null) {
+					rslt.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+		return listaActividad;
 	}
 	public Actividad consultarActividadesTodos(String nombre){
 		String query = "SELECT " + COL_NOM_ACTI + ", " + COL_PRECIO_ACTI + ", " + COL_DES_ACT + " FROM " + TABLA_ACTIVIDADES + " WHERE " + COL_NOM_ACTI + " = ?";
@@ -394,7 +432,7 @@ public class Persistance {
 	public int actualizarDatosCliente(String dni, Cliente c) {
 		String query = "UPDATE " + TABLA_CLI + " SET " + COL_NOMBRE_CLI + " = ?, " + COL_APELLIDO_CLI
 				+ " = ?, " + COL_DIA_NAC_CLI + " = ?, " + COL_MES_NAC_CLI + " = ?, " + COL_ANO_NAC_CLI + " = ?, " + COL_EMAIL_CLI
-				+ " = ?" + COL_CONTRASENA_CLI + " = ?, " +   " WHERE " + COL_DNI_CLI + " = ?";
+				+ " = ?, " + COL_CONTRASENA_CLI + " = ? " +   " WHERE " + COL_DNI_CLI + " = ?";
 		int res = 0;
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -540,7 +578,77 @@ public class Persistance {
         }
         return res;
     }
-	
+	public int borrarActividadC(String nombre) {
+        String query = "DELETE FROM " + TABLA_CLIENTES_ACTIVIDADES + " WHERE " + COL_NOMBRE_CLI_ACT + " = ?";
+        int res = 0;
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+            con = aDB.getConnection();
+            stmt = con.prepareStatement(query);
+            stmt.setString(1, nombre);
+            res = stmt.executeUpdate();
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            res = -1;
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            res = -1;
+        } finally {
+            try {
+
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                // TODO: handle exception
+                e.printStackTrace();
+            }
+        }
+        return res;
+    }
+	public int borrarActividadesC(String dni) {
+		// TODO Auto-generated method stub
+		  String query = "DELETE FROM " + TABLA_CLIENTES_ACTIVIDADES + " WHERE " + COL_DNI_CLI_ACT + " = ?";
+	        int res = 0;
+	        Connection con = null;
+	        PreparedStatement stmt = null;
+
+	        try {
+	            con = aDB.getConnection();
+	            stmt = con.prepareStatement(query);
+	            stmt.setString(1, dni);
+	            res = stmt.executeUpdate();
+	        } catch (ClassNotFoundException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	            res = -1;
+	        } catch (SQLException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	            res = -1;
+	        } finally {
+	            try {
+
+	                if (stmt != null) {
+	                    stmt.close();
+	                }
+	                if (con != null) {
+	                    con.close();
+	                }
+	            } catch (SQLException e) {
+	                // TODO: handle exception
+	                e.printStackTrace();
+	            }
+	        }
+	        return res;
+	}
 	//registrar datos de cliente
 	public int registrarCliente(Cliente c) {
 		String query = "INSERT INTO " + TABLA_CLI + "( " + COL_DNI_CLI + ", " + COL_NOMBRE_CLI + ", " + COL_APELLIDO_CLI
@@ -612,4 +720,5 @@ public class Persistance {
         }
         return res;
     }
+	
 }

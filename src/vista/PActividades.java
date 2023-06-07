@@ -18,20 +18,21 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextArea;
 
 public class PActividades extends JPanel {
 	public static final String CONSULTA = "Consultar";
 	public static final String UNIRSE = "Unirse";
 	private JTable table;
-	private JScrollPane scrollPane;
+	private JScrollPane scrpTabla;
 	private DefaultTableModel model = new DefaultTableModel();
 	public String[] column = new String[] { "ACTIVIDAD", "PRECIO" };
 	private JComboBox cmbhoraFin;
 	private JLabel lblhoraFin;
-	private JTextField txtTablaDescripcion;
 	private JComboBox cmbhoraIni;
 	private JButton btnConsulta;
 	private JButton btnUnirse;
+	private JTextArea txtTablaDescripcion;
 
 	public PActividades() {
 		setLayout(null);
@@ -44,6 +45,7 @@ public class PActividades extends JPanel {
 		
 
 		cmbhoraIni = new JComboBox();
+		cmbhoraIni.setFont(new Font("Dialog", Font.PLAIN, 20));
 		cmbhoraIni.setModel(new DefaultComboBoxModel(new String[] { "", "9:00 ", "10:00", "11:00", "12:00", "13:00",
 				"14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00" }));
 		cmbhoraIni.setBounds(712, 172, 279, 69);
@@ -55,6 +57,7 @@ public class PActividades extends JPanel {
 		add(lblhoraIni);
 
 		cmbhoraFin = new JComboBox();
+		cmbhoraFin.setFont(new Font("Dialog", Font.PLAIN, 20));
 		cmbhoraFin.setModel(new DefaultComboBoxModel(new String[] { "", "10:00", "11:00", "12:00", "13:00", "14:00",
 				"15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00" }));
 		cmbhoraFin.setBounds(1398, 172, 279, 69);
@@ -64,14 +67,6 @@ public class PActividades extends JPanel {
 		lblhoraFin.setFont(new Font("Dialog", Font.BOLD, 24));
 		lblhoraFin.setBounds(1477, 95, 145, 84);
 		add(lblhoraFin);
-
-		txtTablaDescripcion = new JTextField();
-		txtTablaDescripcion.setFont(new Font("Dialog", Font.PLAIN, 24));
-		txtTablaDescripcion.setEnabled(false);
-		txtTablaDescripcion.setEditable(false);
-		txtTablaDescripcion.setBounds(712, 315, 965, 537);
-		add(txtTablaDescripcion);
-		txtTablaDescripcion.setColumns(10);
 
 		btnUnirse = new JButton(UNIRSE);
 		btnUnirse.setFont(new Font("Dialog", Font.PLAIN, 24));
@@ -84,12 +79,20 @@ public class PActividades extends JPanel {
 		add(btnConsulta);
 
 		activar(false);
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 475, 1080);
-		add(scrollPane);
+		scrpTabla = new JScrollPane();
+		scrpTabla.setBounds(0, 0, 475, 1080);
+		add(scrpTabla);
 
 		table = new JTable();
-		scrollPane.setViewportView(table);
+		scrpTabla.setViewportView(table);
+		
+		JScrollPane scrpDesc = new JScrollPane();
+		scrpDesc.setBounds(712, 309, 966, 548);
+		add(scrpDesc);
+		
+		txtTablaDescripcion = new JTextArea();
+		txtTablaDescripcion.setFont(new Font("Dialog", Font.PLAIN, 18));
+		scrpDesc.setViewportView(txtTablaDescripcion);
 		configurarTabla();
 	}
 
@@ -169,7 +172,7 @@ public class PActividades extends JPanel {
 
 	public boolean comprobarHora() {
 		if (cmbhoraFin.getSelectedIndex() == 0 || cmbhoraIni.getSelectedIndex() == 0
-				|| cmbhoraFin.getSelectedIndex() > cmbhoraIni.getSelectedIndex()) {
+				|| cmbhoraFin.getSelectedIndex() < cmbhoraIni.getSelectedIndex()) {
 			return false;
 		} else {
 			return true;
@@ -182,5 +185,10 @@ public class PActividades extends JPanel {
 		} else {
 			return null;
 		}
+	}
+	public void limpiarDatos() {
+		cmbhoraFin.setSelectedIndex(0);
+		cmbhoraIni.setSelectedIndex(0);
+		txtTablaDescripcion.setText("");
 	}
 }
