@@ -1,19 +1,19 @@
 package vista;
 
+import java.awt.Font;
+import java.awt.Frame;
+
 import javax.swing.JFrame;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JMenu;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-import javax.swing.border.EmptyBorder;
 
 import controlador.Control;
-
-import java.awt.Font;
 
 public class VPrincipalCliente extends JFrame {
 	public static final String SALIR = "Salir";
@@ -30,8 +30,8 @@ public class VPrincipalCliente extends JFrame {
 	public VPrincipalCliente() {
 		super("FITDEVELOPER");
 		init();
-		this.setExtendedState(this.MAXIMIZED_BOTH);
 		setSize(1920, 1080);
+		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		configurarMenu();
 		init();

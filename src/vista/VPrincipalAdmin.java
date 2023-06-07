@@ -3,6 +3,7 @@ package vista;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -14,7 +15,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import controlador.Control;
@@ -22,10 +22,8 @@ import controlador.Control;
 
 public class VPrincipalAdmin extends JFrame {
 
-	private JPanel contentPane;
 	private JMenuItem mntmOpcionModificacion;
 	private JScrollPane scrpContenedor;
-	private JSeparator separator_2;
 	private JMenuItem mntmOpcionRegistro;
 	private JMenuItem mntmOpcionConsulta;
 	private JSeparator separator;
@@ -37,8 +35,8 @@ public class VPrincipalAdmin extends JFrame {
 	public static final String CONSULTA = "Consulta";
 	public VPrincipalAdmin() {
 		super("FITDEVELOPER");
-		this.setExtendedState(this.MAXIMIZED_BOTH);
 		setSize(1920, 1080);
+		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		configurarMenu();
 		init();

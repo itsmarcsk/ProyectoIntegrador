@@ -15,7 +15,6 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.Control;
-import db.Persistance;
 import modelo.Actividad;
 import modelo.Cliente;
 
@@ -34,10 +33,7 @@ public class PPerfil extends JPanel {
 	private JScrollPane scrpListaActividades;
 	private JButton btnGuardarCambios;
 	private JButton btnBorrarCuenta;
-	private Persistance pers;
-	private VLogin vLogin;
 	private JTextField txtApellidos;
-	private VPrincipalCliente VPC;
 	private JSpinner spnAnio;
 	private JSpinner spnMes;
 	private JSpinner spnDia;
@@ -46,8 +42,6 @@ public class PPerfil extends JPanel {
 	private JTextArea txtDescripcion;
 	
 	public PPerfil() {
-		vLogin = new VLogin();
-		pers = new Persistance();
 		init();
 		
 	}
@@ -55,11 +49,11 @@ public class PPerfil extends JPanel {
 
 	private void init() {
 		// TODO Auto-generated method stub
-		setSize(1920,1080);
+		setSize(1920,984);
 		setLayout(null);
 		
 		JScrollPane scrpDatos = new JScrollPane();
-		scrpDatos.setBounds(1248, 0, 672, 1080);
+		scrpDatos.setBounds(1248, 0, 672, 984);
 		add(scrpDatos);
 		
 		JPanel panelActividades = new JPanel();
@@ -161,7 +155,7 @@ public class PPerfil extends JPanel {
 		panelActividades.add(spnAnio);
 		
 		JScrollPane scrpActividades = new JScrollPane();
-		scrpActividades.setBounds(0, 0, 1250, 1080);
+		scrpActividades.setBounds(0, 0, 1250, 984);
 		add(scrpActividades);
 		
 		JPanel panelDatosPersonales = new JPanel();
@@ -174,7 +168,7 @@ public class PPerfil extends JPanel {
 		panelDatosPersonales.add(lblMisActividades);
 		
 		scrpListaActividades = new JScrollPane();
-		scrpListaActividades.setBounds(59, 131, 525, 864);
+		scrpListaActividades.setBounds(59, 131, 525, 797);
 		panelDatosPersonales.add(scrpListaActividades);
 		
 		tblListaActividades = new JTable();
@@ -200,7 +194,7 @@ public class PPerfil extends JPanel {
 		txtDescripcion.setWrapStyleWord(true);
 		txtDescripcion.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtDescripcion.setEditable(false);
-		txtDescripcion.setBounds(655, 313, 523, 682);
+		txtDescripcion.setBounds(655, 313, 523, 615);
 		panelDatosPersonales.add(txtDescripcion);
 		
 	}

@@ -1,13 +1,17 @@
 package vista;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class PInstalaciones extends JPanel{
 	
-	private JFrame frame;
 
 	public PInstalaciones () {
 		
@@ -15,14 +19,25 @@ public class PInstalaciones extends JPanel{
 	}
 
 	private void init() {
-		frame = new JFrame();
-        frame.setBounds(100, 100, 450, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(null);
-        
-		JLabel lblNewLabel = new JLabel();
-        lblNewLabel.setBounds(10, 10, 414, 242);
-        lblNewLabel.setIcon(new ImageIcon("E:\\FP GS\\UE\\1er curso\\ProyectoIntegrador\\PortableGit\\workspaceProyecto\\ProyectoIntegrador\\img\\mapaActu.PNG"));
-        frame.getContentPane().add(lblNewLabel);
+		// TODO Auto-generated method stub
+		setSize(1920, 984);
+		setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 0, 1920, 984);
+		add(scrollPane);
+		
+		try {
+			
+			BufferedImage myPicture;
+			myPicture = ImageIO.read(new File("img/mapaActu.png"));
+			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+			scrollPane.setViewportView(picLabel);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+
+	
 }

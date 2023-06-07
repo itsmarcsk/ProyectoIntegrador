@@ -1,23 +1,22 @@
 package vista;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTextField;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import controlador.Control;
 import modelo.Actividad;
 
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
-
 public class PAniadirModificar extends JPanel {
 	public static final String ANIADIR_ACTIVIDAD = "Añadir Actividad";
 	public static final String MODIFICAR_ACTIVIDAD = "Modificar Actividad";
-	private String aniadirModificarBoton = "";
 	private JTextField txtNombre;
 	private JTextArea txtaDescripcion;
 	private JButton btnModificarAniadir;
@@ -32,7 +31,7 @@ public class PAniadirModificar extends JPanel {
 
 	private void init() {
 		// TODO Auto-generated method stub
-		setSize(1920,1080);
+		setSize(1920, 984);
 		setLayout(null);
 		
 		lblNombre = new JLabel("Nombre:");
@@ -47,7 +46,7 @@ public class PAniadirModificar extends JPanel {
 		
 		lblDescripcin = new JLabel("Descripción:");
 		lblDescripcin.setFont(new Font("Dialog", Font.PLAIN, 24));
-		lblDescripcin.setBounds(60, 242, 167, 90);
+		lblDescripcin.setBounds(60, 187, 167, 90);
 		add(lblDescripcin);
 		
 		txtNombre = new JTextField();
@@ -63,7 +62,7 @@ public class PAniadirModificar extends JPanel {
 		add(spnPrecio);
 		
 		scrpDescripcion = new JScrollPane();
-		scrpDescripcion.setBounds(60, 343, 1788, 380);
+		scrpDescripcion.setBounds(66, 288, 1788, 517);
 		add(scrpDescripcion);
 		
 		txtaDescripcion = new JTextArea();
@@ -71,7 +70,7 @@ public class PAniadirModificar extends JPanel {
 		
 		btnModificarAniadir = new JButton();
 		btnModificarAniadir.setFont(new Font("Dialog", Font.BOLD, 20));
-		btnModificarAniadir.setBounds(1525, 797, 323, 67);
+		btnModificarAniadir.setBounds(1525, 855, 323, 67);
 		add(btnModificarAniadir);
 	}
 	

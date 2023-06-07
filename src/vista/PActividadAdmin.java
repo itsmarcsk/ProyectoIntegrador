@@ -11,8 +11,6 @@ import javax.swing.table.DefaultTableModel;
 
 import controlador.Control;
 import modelo.Actividad;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class PActividadAdmin extends JPanel {
 	public static final String ELIMINAR = "Eliminar";
@@ -32,21 +30,21 @@ public class PActividadAdmin extends JPanel {
 	}
 
 	private void init() {
-		setSize(1920, 1080);
+		setSize(1920, 984);
 
 		btnModificar = new JButton(MODIFICAR);
 		
 		btnModificar.setFont(new Font("Dialog", Font.BOLD, 24));
-		btnModificar.setBounds(477, 926, 244, 81);
+		btnModificar.setBounds(477, 841, 244, 81);
 		add(btnModificar);
 
 		btnEliminar = new JButton(ELIMINAR);
 		btnEliminar.setFont(new Font("Dialog", Font.BOLD, 24));
-		btnEliminar.setBounds(1198, 926, 244, 81);
+		btnEliminar.setBounds(1198, 841, 244, 81);
 		add(btnEliminar);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(161, 110, 1597, 752);
+		scrollPane.setBounds(161, 110, 1597, 673);
 		add(scrollPane);
 
 		table = new JTable();

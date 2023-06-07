@@ -1,17 +1,15 @@
 package vista;
 
+import java.awt.Font;
+import java.util.ArrayList;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import controlador.Control;
 import modelo.Cliente;
-import modelo.Consulta;
-
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.util.ArrayList;
 
 public class PConsultarClientes extends JPanel {
 
@@ -30,6 +28,8 @@ public class PConsultarClientes extends JPanel {
 	}
 
 	private void init() {
+		setSize(1920, 984);
+		
 		setLayout(null);
 
 		JLabel lblClientes = new JLabel("Clientes");

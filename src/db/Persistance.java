@@ -45,7 +45,6 @@ public class Persistance {
 	public boolean confirmarInicioCliente(String dni, String contrasenia) {
 		String queryCliente = "SELECT " + COL_DNI_CLI + ", " + COL_CONTRASENA_CLI + " FROM " + TABLA_CLI + " WHERE "
 				+ COL_DNI_CLI + " = ?";
-		Cliente c;
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rslt = null;
