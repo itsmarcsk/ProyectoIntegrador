@@ -2,6 +2,7 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
@@ -59,9 +60,14 @@ public class Control implements ActionListener{
 			if (e.getActionCommand().equals(VPrincipalCliente.INSTALACIONES)) {
 				vPC.cargarPanel(pI);
 			} else if (e.getActionCommand().equals(VPrincipalCliente.ACTIVIDADES)) {
+				ArrayList<Actividad> listaActividad = pers.consultarActividades();
+				PA.rellenarTabla(listaActividad);
+				PA.activar(false);
 				vPC.cargarPanel(PA);
 				
 			} else if (e.getActionCommand().equals(VPrincipalCliente.PERFIL)) {
+				PP.rellenarDatosPersonales(pers.consultarDatos(vLogin.getUsuario())); 
+				PP.rellenarTabla(pers.consultarActividadesCliente(vLogin.getUsuario()));
 				vPC.cargarPanel(PP);
 				
 			} else if (e.getActionCommand().equals(VPrincipalCliente.SALIR)) {
@@ -84,6 +90,7 @@ public class Control implements ActionListener{
 				
 				if (PP.getNombre() != null) {
 					PP.rellenarDescripcion(pers.consultaDescripcion(PP.getNombre()));
+					
 				} else {
 					vPC.mostrarError("No has seleccionado ninguna actividad");
 				}
@@ -157,17 +164,26 @@ public class Control implements ActionListener{
 			} else if (e.getActionCommand().equals(VRegistro.CREAR_CUENTA)) {
 				
 				Cliente c = vRegistro.getDatos();
-				pers.registrarCliente(c);
+				if(c == null) {
+					vRegistro.mostrarError("No ha rellenado todos los campos");
+				}else {
+					pers.registrarCliente(c);
+					vRegistro.reinicar();
+				}
+			
 				
 				vRegistro.dispose();
 				vLogin.hacerVisible();
 				
 			} else if (e.getActionCommand().equals(VLogin.INICIO_SESION)) {
 				
-				if (pers.confirmarInicioCliente(vLogin.getUsuario(), vLogin.getPassword())) {
+				if(vLogin.getUsuario().isBlank() || vLogin.getPassword().isBlank()) {
+					vPA.mostrarError("No se han rellenado los siguientes campos");
+			
+				}else if (pers.confirmarInicioCliente(vLogin.getUsuario(), vLogin.getPassword())== true) {
 					vLogin.dispose();
 					vPC.hacerVisible();
-				} else if (pers.confirmarInicioAdmin(vLogin.getUsuario(), vLogin.getPassword())) {
+				} else if (pers.confirmarInicioAdmin(vLogin.getUsuario(), vLogin.getPassword()) == true) {
 					vLogin.dispose();
 					vPA.hacerVisible();
 				} else {

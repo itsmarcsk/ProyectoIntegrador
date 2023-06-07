@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JMenu;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Control;
@@ -30,44 +31,51 @@ public class VPrincipalCliente extends JFrame {
 		super("FITDEVELOPER");
 		init();
 		this.setExtendedState(this.MAXIMIZED_BOTH);
-	}
-
-	private void init() {
 		setSize(1920, 1080);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		configurarMenu();
+		init();
 	}
 
 	private void configurarMenu() {
 		JMenuBar menuBar_1 = new JMenuBar();
 		setJMenuBar(menuBar_1);
-		
+
 		JMenu mnMenu_1 = new JMenu("Menu");
 		mnMenu_1.setFont(new Font("Dialog", Font.BOLD, 14));
 		menuBar_1.add(mnMenu_1);
-		
+
 		mntmInstalaciones = new JMenuItem(INSTALACIONES);
 		mntmInstalaciones.setHorizontalTextPosition(SwingConstants.CENTER);
 		mntmInstalaciones.setHorizontalAlignment(SwingConstants.CENTER);
 		mntmInstalaciones.setFont(new Font("Dialog", Font.PLAIN, 12));
 		mnMenu_1.add(mntmInstalaciones);
-		
+
 		mntmActividades = new JMenuItem(ACTIVIDADES);
 		mntmActividades.setFont(new Font("Dialog", Font.PLAIN, 12));
 		mnMenu_1.add(mntmActividades);
-		
+
 		mntmPerfil = new JMenuItem(PERFIL);
 		mntmPerfil.setFont(new Font("Dialog", Font.PLAIN, 12));
 		mnMenu_1.add(mntmPerfil);
-		
+
 		mnSalir = new JMenuItem(SALIR);
 		mnSalir.setFont(new Font("Dialog", Font.BOLD, 14));
 		menuBar_1.add(mnSalir);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+
 		contentPane.setLayout(null);
+	}
+
+	private void init() {
+		// TODO Auto-generated method stub
+		scrpContenedor = new JScrollPane();
+		scrpContenedor.setBounds(0, 0, 2000, 1920);
+		getContentPane().add(scrpContenedor);
+
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
 	}
 
 	public void hacerVisible() {
@@ -85,9 +93,10 @@ public class VPrincipalCliente extends JFrame {
 	public void mostrarAlerta(String alerta) {
 		JOptionPane.showMessageDialog(this, alerta, "Error", JOptionPane.WARNING_MESSAGE);
 	}
-	
+
 	public boolean mostrarPregunta(String mensaje) {
-		if (JOptionPane.showConfirmDialog(this, mensaje, "Confirmación", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_NO_OPTION) {
+		if (JOptionPane.showConfirmDialog(this, mensaje, "Confirmación",
+				JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_NO_OPTION) {
 			return true;
 		} else {
 			return false;

@@ -34,6 +34,7 @@ public class Inicio {
 				PActividadAdmin pAA = new PActividadAdmin();
 				PAniadirModificar pAM = new PAniadirModificar();
 				PInstalaciones pI = new PInstalaciones();
+				
 				Control control = new Control(vLogin, vRegistro, vPA, vPC, PA, pP, pCC , pC, pAA, pAM, pI);
 				
 				

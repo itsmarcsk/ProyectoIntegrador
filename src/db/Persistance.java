@@ -15,7 +15,7 @@ public class Persistance {
 	static final String COL_DNI_ADMIN = "DNI";
 	static final String COL_NOMBRE_ADMIN = "NOMBRE";
 	static final String COL_APELLIDO_ADMIN = "APELLIDOS";
-	static final String COL_CONTRASENA_ADMIN = "CONTRASEÑA";
+	static final String COL_CONTRASENA_ADMIN = "CONTRASENA";
 	static final String TABLA_CLI = "Clientes";
 	static final String COL_DNI_CLI = "DNI";
 	static final String COL_NOMBRE_CLI = "NOMBRE";
@@ -23,9 +23,9 @@ public class Persistance {
 	static final String COL_DIA_NAC_CLI = "DIA_NAC";
 	static final String COL_MES_NAC_CLI = "MES_NAC";
 	static final String COL_ANO_NAC_CLI = "ANO_NAC";
-	static final String COL_PREFIJO_NUM_CLI = "PREFIJO NUMERO";
-	static final String COL_NUM_TEL_CLI = "NUMERO DE TELEFONO";
-	static final String COL_CONTRASENA_CLI = "CONTRASEÑA";
+	static final String COL_PREFIJO_NUM_CLI = "PREFIJO_NUM";
+	static final String COL_NUM_TEL_CLI = "NUM_TEL";
+	static final String COL_CONTRASENA_CLI = "CONTRASENA";
 	static final String COL_EMAIL_CLI = "EMAIL";
 	static final String COL_GENERO_CLI = "GENERO";
 	static final String TABLA_CLIENTES_ACTIVIDADES = "Clientes_Actividades";
@@ -56,7 +56,7 @@ public class Persistance {
 			stmt.setString(1, dni);
 			rslt = stmt.executeQuery();
 
-			if (dni == rslt.getString(COL_DNI_CLI) && contrasenia == rslt.getString(COL_CONTRASENA_CLI)) {
+			if (dni.equals(rslt.getString(COL_DNI_CLI)) && contrasenia.equals(rslt.getString(COL_CONTRASENA_CLI))) {
 				conseguido = true;
 			}
 
@@ -87,8 +87,8 @@ public class Persistance {
 	}
 	//inicio de sesion admin
 	public boolean confirmarInicioAdmin(String dni, String contrasenia) {
-		String queryAdmin = "SELECT " + COL_DNI_ADMIN + ", " + COL_CONTRASENA_ADMIN + " FROM " + TABLA_CLI + " WHERE "
-				+ COL_DNI_CLI + " = ?";
+		String queryAdmin = "SELECT " + COL_DNI_ADMIN + ", " + COL_CONTRASENA_ADMIN + " FROM " + TABLA_ADMIN + " WHERE "
+				+ COL_DNI_ADMIN + " = ?";
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rslt = null;
@@ -98,7 +98,7 @@ public class Persistance {
 			stmt = con.prepareStatement(queryAdmin);
 			stmt.setString(1, dni);
 			rslt = stmt.executeQuery();
-			if (dni == rslt.getString(COL_DNI_ADMIN) && contrasenia == rslt.getString(COL_CONTRASENA_ADMIN)) {
+			if (dni.equals(rslt.getString(COL_DNI_ADMIN)) && contrasenia.equals(rslt.getString(COL_CONTRASENA_ADMIN))) {
 				conseguido = true;
 			}
 		} catch (ClassNotFoundException e) {
@@ -203,7 +203,7 @@ public class Persistance {
 		return listaClientes;
 	}
 	public ArrayList<Actividad> consultarActividadesCliente(String dni) {
-		String query = "SELECT " + COL_NOM_ACTI + ", " + COL_PRECIO_ACTI + ", " + COL_DES_ACT + " FROM " + TABLA_ACTIVIDADES + " WHERE " + COL_NOM_ACTI + " = SELECT " + COL_NOMBRE_CLI_ACT + " FROM " + TABLA_CLIENTES_ACTIVIDADES + " WHERE " + COL_DNI_CLI + " = ?";
+		String query = "SELECT " + COL_NOM_ACTI + ", " + COL_PRECIO_ACTI + ", " + COL_DES_ACT + " FROM " + TABLA_ACTIVIDADES + " WHERE " + COL_NOM_ACTI + " = (SELECT " + COL_NOMBRE_CLI_ACT + " FROM " + TABLA_CLIENTES_ACTIVIDADES + " WHERE " + COL_DNI_CLI + " = ?)";
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rslt = null;

@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
@@ -231,16 +232,16 @@ public class VRegistro extends JFrame {
 			return null;
 		}
 		
-		int diaNac = (int) cmbDia.getSelectedItem();
-		int mesNac = (int) cmbMes.getSelectedItem();
-		int anioNac = (int) cmbAnio.getSelectedItem();
+		int diaNac = Integer.parseInt((String) cmbDia.getSelectedItem());
+		int mesNac = Integer.parseInt((String) cmbMes.getSelectedItem());
+		int anioNac = Integer.parseInt((String) cmbAnio.getSelectedItem());
 		
 		String dni = txtDni.getText();
 		if (dni.isBlank()) {
 			return null;
 		}
 		
-		int prefijo = (int) cmbPrefijo.getSelectedItem();
+		int prefijo = Integer.parseInt((String) cmbPrefijo.getSelectedItem());
 		String telefonoS = txtTelef.getText();
 		if (telefonoS.length() != 9) {
 			return null;
@@ -256,13 +257,10 @@ public class VRegistro extends JFrame {
 			e.printStackTrace();
 		}
 		
-		String genero = btngrpGenero.getSelection().toString();
 		
-		if (genero.isBlank()) {
-			return null;
-		} else if (genero.equals("Prefiero no decirlo")) {
-			genero = null;
-		}
+		String genero =generoElegido();
+		
+		
 		
 		String email = txtEmail.getText();
 		
@@ -272,11 +270,24 @@ public class VRegistro extends JFrame {
 		
 		if (txtContrasenia.getText().equals(txtContrasenia2.getText())) {
 			String contrasenia = txtContrasenia.getText();
-			Cliente cliente = new Cliente(nombre, apellido, diaNac, mesNac, anioNac, dni, prefijo, telefono, genero, email, dni);
+			Cliente cliente = new Cliente(nombre, apellido, diaNac, mesNac, anioNac, dni, prefijo, telefono, genero, email, contrasenia);
 			return cliente;
 		} else {
 			
 			return null;
+		}
+	}
+
+	private String generoElegido() {
+		// TODO Auto-generated method stub
+		if (btngrpGenero.getSelection() == null) {
+			return null;
+		} else if (btngrpGenero.getSelection().equals("Prefiero no decirlo")) {
+			return null;
+		}else if(btngrpGenero.getSelection().equals("Masculino")) {
+			return "Masculino";
+		}else {
+			return "Femenino";
 		}
 	}
 
@@ -289,5 +300,38 @@ public class VRegistro extends JFrame {
 		btnCrearCuenta.addActionListener(control);
 	}
 	
+	public void mostrarMensaje(String mensaje) {
+		JOptionPane.showMessageDialog(this, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
+	}
 
+	public void mostrarError(String error) {
+		JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+
+	public void mostrarAlerta(String alerta) {
+		JOptionPane.showMessageDialog(this, alerta, "Error", JOptionPane.WARNING_MESSAGE);
+	}
+	
+	public boolean mostrarPregunta(String mensaje) {
+		if (JOptionPane.showConfirmDialog(this, mensaje, "Confirmación", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_NO_OPTION) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void reinicar() {
+		// TODO Auto-generated method stub
+		txtApellido.setText("");
+		txtContrasenia.setText("");
+		txtContrasenia2.setText("");
+		txtDni.setText("");
+		txtEmail.setText("");
+		txtNombre.setText("");
+		txtTelef.setText("");
+		cmbDia.setSelectedIndex(0);
+		cmbMes.setSelectedIndex(0);
+		cmbAnio.setSelectedIndex(0);
+		cmbPrefijo.setSelectedIndex(0);
+	}
 }

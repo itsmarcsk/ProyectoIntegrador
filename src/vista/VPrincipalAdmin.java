@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
@@ -38,16 +39,12 @@ public class VPrincipalAdmin extends JFrame {
 		super("FITDEVELOPER");
 		init();
 		this.setExtendedState(this.MAXIMIZED_BOTH);
-	}
-	private void init() {
 		setSize(1920, 1080);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		configurarMenu();
-		setContentPane(contentPane);
+		init();
 	}
+
 	private void configurarMenu() {
 		// TODO Auto-generated method stub
 		JMenuBar mnbBarraMenu = new JMenuBar();
@@ -90,6 +87,15 @@ public class VPrincipalAdmin extends JFrame {
 		mnMenu2.add(mntmOpcionConsulta);
 		getContentPane().setLayout(null);
 		getContentPane().setLayout(null);
+	}
+	private void init() {
+		// TODO Auto-generated method stub
+		scrpContenedor = new JScrollPane();
+		scrpContenedor.setBounds(0, 0, 2000, 1920);
+		getContentPane().add(scrpContenedor);
+
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
 	}
 	public void hacerVisible() {
 		setVisible(true);

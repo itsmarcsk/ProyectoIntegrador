@@ -205,14 +205,15 @@ public class PPerfil extends JPanel {
 		lblDescripcin.setBounds(655, 222, 245, 66);
 		panelDatosPersonales.add(lblDescripcin);
 		
-		rellenarDatosPersonales();
 		
-		rellenarTabla(pers.consultarActividadesCliente(vLogin.getUsuario()));
+		
+		
 	}
 
 
-	private void rellenarDatosPersonales() {
-		Cliente c = pers.consultarDatos(vLogin.getUsuario());
+	public void rellenarDatosPersonales(Cliente cliente) {
+		
+		Cliente c = cliente;
 		
 		txtNombre.setText(c.getNombre());
 		txtNombre.setText(c.getApellido());

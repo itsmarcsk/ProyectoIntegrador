@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import controlador.Control;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import java.awt.Dimension;
@@ -121,5 +122,24 @@ public class VLogin extends JFrame {
 	public void setListener(Control control) {
 		btnIniciarSesion.addActionListener(control);
 		btnRegistro.addActionListener(control);
+	}
+	public void mostrarMensaje(String mensaje) {
+		JOptionPane.showMessageDialog(this, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public void mostrarError(String error) {
+		JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+
+	public void mostrarAlerta(String alerta) {
+		JOptionPane.showMessageDialog(this, alerta, "Error", JOptionPane.WARNING_MESSAGE);
+	}
+	
+	public boolean mostrarPregunta(String mensaje) {
+		if (JOptionPane.showConfirmDialog(this, mensaje, "Confirmación", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_NO_OPTION) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
