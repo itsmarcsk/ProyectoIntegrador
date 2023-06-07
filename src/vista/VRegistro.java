@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 
 import controlador.Control;
 import modelo.Cliente;
+import javax.swing.JPasswordField;
 
 public class VRegistro extends JFrame {
 	private static final int ALTO = 800;
@@ -25,8 +26,6 @@ public class VRegistro extends JFrame {
 	private JTextField txtApellido;
 	private JTextField txtDni;
 	private JTextField txtTelef;
-	private JTextField txtContrasenia;
-	private JTextField txtContrasenia2;
 	private JTextField txtEmail;
 	private final ButtonGroup btngrpGenero = new ButtonGroup();
 	private JButton btnCancelar;
@@ -39,6 +38,8 @@ public class VRegistro extends JFrame {
 	private JComboBox cmbAnio;
 	private JTextField txtNombre;
 	private JComboBox cmbPrefijo;
+	private JPasswordField txtContrasenia;
+	private JPasswordField txtContrasenia2;
 
 	public VRegistro() {
 		super("REGISTRO");
@@ -56,6 +57,7 @@ public class VRegistro extends JFrame {
 		getContentPane().add(lblNewLabel);
 
 		txtNombre = new JTextField();
+		txtNombre.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtNombre.setBounds(132, 108, 189, 59);
 		getContentPane().add(txtNombre);
 		txtNombre.setColumns(10);
@@ -66,6 +68,7 @@ public class VRegistro extends JFrame {
 		getContentPane().add(lblNombre);
 
 		txtApellido = new JTextField();
+		txtApellido.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtApellido.setColumns(10);
 		txtApellido.setBounds(466, 108, 189, 59);
 		getContentPane().add(txtApellido);
@@ -86,6 +89,7 @@ public class VRegistro extends JFrame {
 		getContentPane().add(lblDni);
 
 		txtDni = new JTextField();
+		txtDni.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtDni.setColumns(10);
 		txtDni.setBounds(132, 264, 127, 59);
 		getContentPane().add(txtDni);
@@ -96,6 +100,7 @@ public class VRegistro extends JFrame {
 		getContentPane().add(lblTelefono);
 
 		txtTelef = new JTextField();
+		txtTelef.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtTelef.setColumns(10);
 		txtTelef.setBounds(480, 268, 175, 55);
 		getContentPane().add(txtTelef);
@@ -115,17 +120,8 @@ public class VRegistro extends JFrame {
 		lblContrasenia2.setBounds(22, 576, 198, 59);
 		getContentPane().add(lblContrasenia2);
 
-		txtContrasenia = new JTextField();
-		txtContrasenia.setColumns(10);
-		txtContrasenia.setBounds(220, 498, 435, 59);
-		getContentPane().add(txtContrasenia);
-
-		txtContrasenia2 = new JTextField();
-		txtContrasenia2.setColumns(10);
-		txtContrasenia2.setBounds(220, 580, 435, 59);
-		getContentPane().add(txtContrasenia2);
-
 		txtEmail = new JTextField();
+		txtEmail.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtEmail.setColumns(10);
 		txtEmail.setBounds(132, 420, 523, 59);
 		getContentPane().add(txtEmail);
@@ -194,6 +190,16 @@ public class VRegistro extends JFrame {
 				"421", "46", "41", "90", "380", "379" }));
 		cmbPrefijo.setBounds(372, 264, 72, 59);
 		getContentPane().add(cmbPrefijo);
+		
+		txtContrasenia = new JPasswordField();
+		txtContrasenia.setFont(new Font("Dialog", Font.PLAIN, 20));
+		txtContrasenia.setBounds(220, 498, 435, 55);
+		getContentPane().add(txtContrasenia);
+		
+		txtContrasenia2 = new JPasswordField();
+		txtContrasenia2.setFont(new Font("Dialog", Font.PLAIN, 20));
+		txtContrasenia2.setBounds(220, 576, 435, 55);
+		getContentPane().add(txtContrasenia2);
 		centrarVentana();
 	}
 	private void centrarVentana() {

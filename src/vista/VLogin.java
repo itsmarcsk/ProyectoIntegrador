@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Control;
+import javax.swing.JPasswordField;
 
 
 public class VLogin extends JFrame {
@@ -27,9 +28,9 @@ public class VLogin extends JFrame {
 	private JLabel lblLogin;
 	private JLabel lblContrasena;
 	private JTextField txtUsuario;
-	private JTextField txtPassword;
 	private JButton btnRegistro;
 	private JButton btnIniciarSesion;
+	private JPasswordField txtPassword;
 	
 	public VLogin() {
 		super("LOGIN");
@@ -72,13 +73,6 @@ public class VLogin extends JFrame {
 		contentPane.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
-		txtPassword = new JTextField();
-		txtPassword.setFont(new Font("Dialog", Font.PLAIN, 20));
-		txtPassword.setToolTipText("Introduce contraseña");
-		txtPassword.setBounds(247, 198, 189, 42);
-		contentPane.add(txtPassword);
-		txtPassword.setColumns(10);
-		
 		btnIniciarSesion = new JButton(INICIO_SESION);
 		btnIniciarSesion.setFont(new Font("Dialog", Font.PLAIN, 20));
 		btnIniciarSesion.setBounds(206, 268, 272, 60);
@@ -94,6 +88,11 @@ public class VLogin extends JFrame {
 		lblRegistro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegistro.setBounds(214, 353, 256, 62);
 		contentPane.add(lblRegistro);
+		
+		txtPassword = new JPasswordField();
+		txtPassword.setFont(new Font("Dialog", Font.PLAIN, 20));
+		txtPassword.setBounds(247, 198, 189, 42);
+		contentPane.add(txtPassword);
 		setSize(ANCHO, ALTO);
 		centrarVentana();
 	}

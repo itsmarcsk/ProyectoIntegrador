@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import controlador.Control;
 import modelo.Actividad;
 import modelo.Cliente;
+import javax.swing.JPasswordField;
 
 public class PPerfil extends JPanel {
 	public static final String BORRAR_ACTIVIDAD = "Borrar Actividad";
@@ -24,7 +25,6 @@ public class PPerfil extends JPanel {
 	public static final String BORRAR_CUENTA = "Borrar Cuenta";
 	public static final String GUARDAR_CAMBIOS = "Guardar Cambios";
 	private JTextField txtNombre;
-	private JTextField txtContra;
 	private JTextField txtEmail;
 	private JTextField txtDni;
 	private JTable tblListaActividades;
@@ -40,6 +40,7 @@ public class PPerfil extends JPanel {
 	private DefaultTableModel model  = new DefaultTableModel();
 	public String[] column = new String[] { "NOMBRE", "PRECIO"};
 	private JTextArea txtDescripcion;
+	private JPasswordField txtContra;
 	
 	public PPerfil() {
 		init();
@@ -96,12 +97,6 @@ public class PPerfil extends JPanel {
 		panelActividades.add(txtNombre);
 		txtNombre.setColumns(10);
 		
-		txtContra = new JTextField();
-		txtContra.setFont(new Font("Dialog", Font.PLAIN, 20));
-		txtContra.setColumns(10);
-		txtContra.setBounds(259, 353, 351, 56);
-		panelActividades.add(txtContra);
-		
 		txtEmail = new JTextField();
 		txtEmail.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtEmail.setColumns(10);
@@ -153,6 +148,11 @@ public class PPerfil extends JPanel {
 		spnAnio.setFont(new Font("Dialog", Font.PLAIN, 20));
 		spnAnio.setBounds(455, 567, 113, 66);
 		panelActividades.add(spnAnio);
+		
+		txtContra = new JPasswordField();
+		txtContra.setFont(new Font("Dialog", Font.PLAIN, 20));
+		txtContra.setBounds(259, 353, 351, 56);
+		panelActividades.add(txtContra);
 		
 		JScrollPane scrpActividades = new JScrollPane();
 		scrpActividades.setBounds(0, 0, 1250, 984);
