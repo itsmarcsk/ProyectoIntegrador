@@ -6,6 +6,7 @@ import vista.PActividadAdmin;
 import vista.PActividades;
 import vista.PAniadirModificar;
 import vista.PConsultarClientes;
+import vista.PImgInicio;
 import vista.PInstalaciones;
 import vista.PPerfil;
 import vista.VLogin;
@@ -32,8 +33,9 @@ public class Inicio {
 				PActividadAdmin pAA = new PActividadAdmin();
 				PAniadirModificar pAM = new PAniadirModificar();
 				PInstalaciones pI = new PInstalaciones();
+				PImgInicio pII = new PImgInicio();
 				
-				Control control = new Control(vLogin, vRegistro, vPA, vPC, PA, pP, pCC , pAA, pAM, pI);
+				Control control = new Control(vLogin, vRegistro, vPA, vPC, PA, pP, pCC , pAA, pAM, pI, pII);
 				
 				
 				

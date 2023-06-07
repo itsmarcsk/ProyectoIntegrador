@@ -14,6 +14,7 @@ import vista.PActividadAdmin;
 import vista.PActividades;
 import vista.PAniadirModificar;
 import vista.PConsultarClientes;
+import vista.PImgInicio;
 import vista.PInstalaciones;
 import vista.PPerfil;
 import vista.VLogin;
@@ -34,10 +35,11 @@ public class Control implements ActionListener {
 	private Persistance pers;
 	private PAniadirModificar pAM;
 	private PInstalaciones pI;
+	private PImgInicio pII;
 
 	public Control(VLogin vLogin, VRegistro vRegistro, VPrincipalAdmin vPA, VPrincipalCliente vPC, PActividades pA,
 			PPerfil pP, PConsultarClientes pCC, PActividadAdmin pAA, PAniadirModificar pAM,
-			PInstalaciones pI) {
+			PInstalaciones pI, PImgInicio pII) {
 		this.vLogin = vLogin;
 		this.vRegistro = vRegistro;
 		this.vPA = vPA;
@@ -48,6 +50,7 @@ public class Control implements ActionListener {
 		this.pAA = pAA;
 		this.pAM = pAM;
 		this.pI = pI;
+		this.pII = pII;
 		pers = new Persistance();
 	}
 
@@ -189,9 +192,11 @@ public class Control implements ActionListener {
 
 				} else if (pers.confirmarInicioCliente(vLogin.getUsuario(), vLogin.getPassword()) == true) {
 					vLogin.dispose();
+					vPC.cargarPanel(pII);
 					vPC.hacerVisible();
 				} else if (pers.confirmarInicioAdmin(vLogin.getUsuario(), vLogin.getPassword()) == true) {
 					vLogin.dispose();
+					vPA.cargarPanel(pII);
 					vPA.hacerVisible();
 				} else {
 					vPA.mostrarError("No existe la cuenta introducida");
